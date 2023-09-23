@@ -2,6 +2,24 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "src/"
+		},
+		{
+			"path": "src/app/"
+		},
+		{
+			"path": "src/features/"
+		},
+		{
+			"path": "src/pages/"
+		},
+		{
+			"path": "src/components/"
+		},
+		{
+			"path": "src/utils/"
 		}
 	],
 	"settings": {}
