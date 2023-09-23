@@ -3,7 +3,7 @@ import PageLayout from '../../components/PageLayout';
 
 
 export default function Page() {
-    document.title = 'Dashboard'
+    document.title = 'QR Generator'
 
     return <PageLayout>
         <Container>

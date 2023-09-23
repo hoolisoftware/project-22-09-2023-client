@@ -3,7 +3,7 @@ import PageLayout from '../../components/PageLayout';
 
 
 export default function Page() {
-    document.title = 'Dashboard'
+    document.title = 'Account Settings'
 
     return <PageLayout>
         <Container>
