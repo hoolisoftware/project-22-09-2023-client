@@ -33,7 +33,7 @@ export default function TemporaryDrawer(props: props) {
         onKeyDown={() => props.setActive(false)}
     >
         <List>
-            <ListItemLink to='/offers/create' primary={'Create Offer'} icon={<LocalOfferIcon />}/>
+            <ListItemLink to='/events' primary={'Events'} icon={<LocalOfferIcon />}/>
             <ListItemLink to='/winners' primary={'Winners'} icon={<EmojiEventsIcon />}/>
             <ListItemLink to='/history' primary={'History'} icon={<HistoryIcon />}/>
             <ListItemLink to='/qr-generator' primary={'QR generator'} icon={<QrCodeIcon />}/>

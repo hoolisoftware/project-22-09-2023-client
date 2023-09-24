@@ -1,5 +1,6 @@
 import Container from '../../components/Container'
 import PageLayout from '../../components/PageLayout';
+import Table from './Table'
 
 
 export default function Page() {
@@ -7,9 +8,7 @@ export default function Page() {
 
     return <PageLayout>
         <Container>
-            <center>
-                Winners page
-            </center>
+            <Table/>
         </Container>
     </PageLayout>
 }
