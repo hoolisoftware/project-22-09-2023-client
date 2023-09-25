@@ -10,9 +10,8 @@ interface Props
     setSelected: CallableFunction
 }
 
-interface Film {
-    title: string;
-    year: number;
+interface Branch {
+    address: string
 }
 
 function sleep(delay = 0) {
@@ -23,7 +22,7 @@ function sleep(delay = 0) {
 
 export default function Asynchronous(props:Props) {
     const [open, setOpen] = React.useState(false);
-    const [options, setOptions] = React.useState<readonly Film[]>([]);
+    const [options, setOptions] = React.useState<readonly Branch[]>([]);
     const loading = open && options.length === 0;
 
     React.useEffect(() => {
@@ -34,7 +33,7 @@ export default function Asynchronous(props:Props) {
         (async () => {
             await sleep(1e3); // For demo purposes.
             if (active) {
-                setOptions([...topFilms]);
+                setOptions([...branches]);
             }
         })();
         return () => {
@@ -50,6 +49,7 @@ export default function Asynchronous(props:Props) {
 
     return (
         <Autocomplete
+            sx={{mb:3}}
             fullWidth
             open={open}
             onOpen={() => {
@@ -58,7 +58,7 @@ export default function Asynchronous(props:Props) {
             onClose={() => {
                 setOpen(false)
             }}
-            isOptionEqualToValue={(option, value) => option.title === value.title}
+            isOptionEqualToValue={(option, value) => option.address === value.address}
             onInputChange={
                 () => props.setSelected(false)
             }
@@ -66,10 +66,11 @@ export default function Asynchronous(props:Props) {
                 () => props.setSelected(true)
             }
             getOptionLabel={
-                option => option.title
+                option => option.address
             }
             options={options}
             loading={loading}
+            defaultValue={branches[0]}
             renderInput={(params) => (
                 <TextField
                     {...params}
@@ -90,52 +91,53 @@ export default function Asynchronous(props:Props) {
 }
 
 // Top films as rated by IMDb users. http://www.imdb.com/chart/top
-const topFilms = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 },
+const branches = [
     {
-        title: 'The Lord of the Rings: The Return of the King',
-        year: 2003,
-    },
-    { title: 'The Good, the Bad and the Ugly', year: 1966 },
-    { title: 'Fight Club', year: 1999 },
-    {
-        title: 'The Lord of the Rings: The Fellowship of the Ring',
-        year: 2001,
+        address: 'Астраханская область, город Клин, наб. Ломоносова, 15',
     },
     {
-        title: 'Star Wars: Episode V - The Empire Strikes Back',
-        year: 1980,
+        address: 'Вологодская область, город Серебряные Пруды, бульвар Чехова, 62',
     },
-    { title: 'Forrest Gump', year: 1994 },
-    { title: 'Inception', year: 2010 },
     {
-        title: 'The Lord of the Rings: The Two Towers',
-        year: 2002,
+        address: 'Ивановская область, город Лотошино, шоссе Славы, 01'
     },
-    { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-    { title: 'Goodfellas', year: 1990 },
-    { title: 'The Matrix', year: 1999 },
-    { title: 'Seven Samurai', year: 1954 },
     {
-        title: 'Star Wars: Episode IV - A New Hope',
-        year: 1977,
+        address: 'Омская область, город Сергиев Посад, пр. 1905 года, 26'
     },
-    { title: 'City of God', year: 2002 },
-    { title: 'Se7en', year: 1995 },
-    { title: 'The Silence of the Lambs', year: 1991 },
-    { title: "It's a Wonderful Life", year: 1946 },
-    { title: 'Life Is Beautiful', year: 1997 },
-    { title: 'The Usual Suspects', year: 1995 },
-    { title: 'Léon: The Professional', year: 1994 },
-    { title: 'Spirited Away', year: 2001 },
-    { title: 'Saving Private Ryan', year: 1998 },
-    { title: 'Once Upon a Time in the West', year: 1968 },
-    { title: 'American History X', year: 1998 },
-    { title: 'Interstellar', year: 2014 },
+    {
+        address: 'Калининградская область, город Коломна, наб. Чехова, 98'
+    },
+    {
+        address: 'Пензенская область, город Сергиев Посад, шоссе Сталина, 61'
+    },
+    {
+        address: 'Самарская область, город Одинцово, ул. Будапештсткая, 84'
+    },
+    {
+        address: 'Вологодская область, город Красногорск, бульвар Чехова, 22'
+    },
+    {
+        address: 'Новосибирская область, город Шаховская, въезд Ленина, 24'
+    },
+    {
+        address: 'Пензенская область, город Мытищи, шоссе Чехова, 81'
+    },
+    {
+        address: 'Ростовская область, город Люберцы, наб. Домодедовская, 41'
+    },
+    {
+        address: 'Московская область, город Истра, пл. Гагарина, 90'
+    },
+    {
+        address: 'Белгородская область, город Ступино, спуск Ленина, 99'
+    },
+    {
+        address: 'Белгородская область, город Луховицы, бульвар Гоголя, 94'
+    },
+    {
+        address: 'Пензенская область, город Павловский Посад, пер. Ломоносова, 99'
+    },
+    {
+        address: 'Новосибирская область, город Серебряные Пруды, спуск Славы, 65'
+    }
 ];

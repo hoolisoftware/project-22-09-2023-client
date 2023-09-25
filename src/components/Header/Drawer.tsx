@@ -4,6 +4,12 @@ import {
     Button,
     Drawer,
     List,
+    ListSubheader,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Divider
 } from '@mui/material'
 
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
@@ -11,11 +17,11 @@ import HistoryIcon from '@mui/icons-material/History';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import LogoutIcon from '@mui/icons-material/Logout';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
-import { toggleModalBranch } from '../../features/modals/modalsReducer';
+import { toggleModalBar, toggleModalBranch } from '../../features/modals/modalsReducer';
 import ListItemLink from '../ListItemLink';
 import BusinessIcon from '@mui/icons-material/Business';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 interface props {
     active: boolean
@@ -33,15 +39,50 @@ export default function TemporaryDrawer(props: props) {
         onClick={() => props.setActive(false)}
         onKeyDown={() => props.setActive(false)}
     >
-        <Button sx={{mt: 3}} fullWidth size='large' startIcon={<AccountTreeIcon/>} onClick={ () => dispatch(toggleModalBranch()) }>Valencia Irish Pub</Button>
-        <List sx={{ my: 2 }}>
-            <ListItemLink to='/events' primary={'Branches'} icon={<BusinessIcon />}/>
+        <List>
             <ListItemLink to='/events' primary={'Events'} icon={<LocalOfferIcon />}/>
             <ListItemLink to='/winners' primary={'Winners'} icon={<EmojiEventsIcon />}/>
             <ListItemLink to='/history' primary={'History'} icon={<HistoryIcon />}/>
             <ListItemLink to='/qr-generator' primary={'QR generator'} icon={<QrCodeIcon />}/>
         </List>
-        <Button fullWidth color='error' startIcon={<LogoutIcon />}>Logout</Button>
+        <List
+            subheader={<ListSubheader>Filters</ListSubheader>}
+        >
+            <ListItem
+                onClick={ () => dispatch(toggleModalBar()) }
+                disablePadding
+            >
+                <ListItemButton>
+                    <ListItemIcon>
+                        <BusinessIcon/>
+                    </ListItemIcon>
+                    <ListItemText>
+                        Burger King
+                    </ListItemText>
+                </ListItemButton>
+            </ListItem>
+            <ListItem
+                onClick={ () => dispatch(toggleModalBranch()) }
+                disablePadding
+            >
+                <ListItemButton>
+                    <ListItemIcon>
+                        <LocationOnIcon/>
+                    </ListItemIcon>
+                    <ListItemText>
+                        Астраханская область, город Клин, наб. Ломоносова, 15
+                    </ListItemText>
+                </ListItemButton>
+            </ListItem>
+        </List>
+        <List
+            subheader={<ListSubheader>Administration</ListSubheader>}
+        >
+            <ListItemLink to='/bars' primary={'Bars'} icon={<BusinessIcon />}/>
+            <ListItemLink to='/branches' primary={'Branches'} icon={<LocationOnIcon />}/>
+        </List>
+        <Divider/>
+        <Button sx={{mt: 2}} fullWidth color='error' startIcon={<LogoutIcon />}>Logout</Button>
     </Box>
 
     return <Drawer

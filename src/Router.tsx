@@ -11,6 +11,9 @@ import EventList from './pages/EventList'
 import QRGenerator from './pages/QRGenerator'
 import Winners from './pages/Winners'
 import AccountSettings from './pages/AccountSettings'
+import UserList from './pages/UserList'
+import BarList from './pages/BarList'
+import BranchList from './pages/BranchList'
 
 const router = createBrowserRouter([
     {
@@ -48,8 +51,19 @@ const router = createBrowserRouter([
     {
         path: 'winners/',
         element: <Winners/>
+    },
+    {
+        path: 'users/',
+        element: <UserList/>
+    },
+    {
+        path: 'bars/',
+        element: <BarList/>
+    },
+    {
+        path: 'branches/',
+        element: <BranchList/>
     }
-
 ])
 
 

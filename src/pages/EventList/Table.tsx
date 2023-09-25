@@ -73,9 +73,9 @@ function createData(
 const rows = [
     createData(124, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
     createData(125, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'create'),
-    createData(126, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'activated'),
+    createData(126, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'low', 'activated'),
     createData(127, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
-    createData(128, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
+    createData(128, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'high', 'edit'),
 ]
 
 export default function CustomizedTables() {

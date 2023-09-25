@@ -8,11 +8,12 @@ import {
   Card,
   CardContent
 } from '@mui/material'
-import AccountTree from '@mui/icons-material/AccountTree';
+import BusinessIcon from '@mui/icons-material/Business';
 
 import { RootState } from '../../app/store';
-import { toggleModalBranch } from '../../features/modals/modalsReducer';
-import Autocomplete from './AutoComplete'
+import { toggleModalBar } from '../../features/modals/modalsReducer';
+import AutocompleteBranch from '../ChangeBranchModal/AutoComplete'
+import AutoComplete from './AutoComplete'
 
 
 const style = {
@@ -27,14 +28,15 @@ const style = {
 
 export default function BasicModal() {
   const dispatch = useDispatch()
-  const active = useSelector((state: RootState) => state.modals.modalBranch)
-  const [selected, setSelected] = useState<boolean>(false)
+  const active = useSelector((state: RootState) => state.modals.modalBar)
+  const [selectedBar, setSelectedBar] = useState<boolean>(false)
+  const [selectedBranch, setSelectedBranch] = useState<boolean>(false)
 
   return (
     <div>
       <Modal
         open={active}
-        onClose={ () => dispatch(toggleModalBranch()) }
+        onClose={ () => dispatch(toggleModalBar()) }
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -42,10 +44,11 @@ export default function BasicModal() {
           <Card>
             <CardContent>
               <Typography sx={{mb: 3}} variant="h6" component="h2">
-                Select branch
+                Select bar
               </Typography>
-              <Autocomplete selected={selected} setSelected={setSelected}/>
-              <Button disabled={!selected} startIcon={<AccountTree/>} variant='contained' sx={{mt:3}}>
+              <AutoComplete selected={selectedBar} setSelected={setSelectedBar}/>
+              <AutocompleteBranch selected={selectedBranch} setSelected={setSelectedBranch}/>
+              <Button disabled={!selectedBar && !selectedBranch} startIcon={<BusinessIcon/>} variant='contained'>
                 SELECT
               </Button>
             </CardContent>
