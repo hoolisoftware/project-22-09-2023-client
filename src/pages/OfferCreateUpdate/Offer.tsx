@@ -31,8 +31,8 @@ export default function BasicGrid(props: props) {
                                             placeholder="Prize description"
                                             multiline
                                             rows={5}
-                                            value={
-                                                props.offerId ? `${item} lorem ipsum` : ')'
+                                            defaultValue={
+                                                props.offerId ? `${item} lorem ipsum` : ''
                                             }
                                         />
                                     </center>
