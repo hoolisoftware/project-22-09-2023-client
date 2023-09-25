@@ -5,7 +5,8 @@ import {
 
 import Dashboard from './pages/Dashboard'
 import History from './pages/History'
-import OfferCreate from './pages/OfferCreate'
+import OfferCreateUpdate from './pages/OfferCreateUpdate'
+import OfferDetail from './pages/OfferDetail'
 import EventList from './pages/EventList'
 import QRGenerator from './pages/QRGenerator'
 import Winners from './pages/Winners'
@@ -25,8 +26,16 @@ const router = createBrowserRouter([
         element: <History/>
     },
     {
+        path: 'offers/:offerId/',
+        element: <OfferDetail title='Offer details'/>
+    },
+    {
         path: 'offers/create/',
-        element: <OfferCreate/>
+        element: <OfferCreateUpdate title='Create offer'/>
+    },
+    {
+        path: 'offers/edit/:offerId/',
+        element: <OfferCreateUpdate title='Edit offer'/>
     },
     {
         path: 'events/',

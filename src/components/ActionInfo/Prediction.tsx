@@ -50,7 +50,7 @@ export default function BasicGrid() {
       <Grid container spacing={2}>
         {
             data.map(item =>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={4} key={item[0]}>
                     <Card variant='outlined'>
                         <CardContent>
                             <center>

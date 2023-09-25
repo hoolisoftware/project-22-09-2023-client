@@ -2,6 +2,7 @@ import css from './index.module.scss'
 
 import Header from '../Header'
 import Footer from '../Footer'
+import ChangeBranchModal from '../ChangeBranchModal'
 
 export default function PageLayout(props: React.HTMLAttributes<HTMLDivElement>)
 {
@@ -11,5 +12,6 @@ export default function PageLayout(props: React.HTMLAttributes<HTMLDivElement>)
             {props.children}
         </div>
         <Footer/>
+        <ChangeBranchModal/>
     </div>
 }

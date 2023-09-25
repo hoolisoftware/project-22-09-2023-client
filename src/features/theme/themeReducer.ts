@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-interface ModalState {
+interface ThemeState {
     modeDark: boolean
 }
 
-const initialState: ModalState = {
+const initialState: ThemeState = {
     modeDark: true,
 }
 

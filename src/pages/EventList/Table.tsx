@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import {
     Button,
+    IconButton,
     Table,
     TableBody,
     TableCell,
@@ -17,6 +18,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import InfoIcon from '@mui/icons-material/Info';
 
 import { titleCase } from '../../utils/string';
 
@@ -48,8 +50,8 @@ interface RiskRateColors
 }
 
 const riskRateColors: RiskRateColors = {
-    low: 'yellow',
-    medium: 'green',
+    low: 'green',
+    medium: 'yellow',
     high: 'red'
 }
 
@@ -59,24 +61,33 @@ function createData(
     actionId: number,
     sport: string,
     league: string,
+    timeStart: string,
     teamHome: string,
     teamAway: string,
     riskRate: RiskRate,
+    status: 'create' | 'edit' | 'activated'
 ) {
-    return { actionId, sport, league, teamHome, teamAway, riskRate };
+    return { actionId, sport, league, timeStart, teamHome, teamAway, riskRate, status };
 }
 
-const row = createData(124, 'Soccer', 'Dream League', 'Tigers', 'Bears', 'medium')
+const rows = [
+    createData(124, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
+    createData(125, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'create'),
+    createData(126, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'activated'),
+    createData(127, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
+    createData(128, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
+]
 
 export default function CustomizedTables() {
     return (
         <TableContainer className={css.tableDesktop} component={Paper}>
-            <Table sx={{ minWidth: 900 }} aria-label="customized table">
+            <Table sx={{ minWidth: 1000 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Action ID</StyledTableCell>
                         <StyledTableCell align="right">Sport</StyledTableCell>
                         <StyledTableCell align="right">League</StyledTableCell>
+                        <StyledTableCell align="right">Start time</StyledTableCell>
                         <StyledTableCell align="right">Home team</StyledTableCell>
                         <StyledTableCell align="right">Away team</StyledTableCell>
                         <StyledTableCell align="right">Risk rate</StyledTableCell>
@@ -84,94 +95,58 @@ export default function CustomizedTables() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <StyledTableRow key={row.actionId}>
-                        <StyledTableCell>#8001</StyledTableCell>
-                        <StyledTableCell align="right" component="th" scope="row">
-                            {row.sport}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">{row.league}</StyledTableCell>
-                        <StyledTableCell align="right">{row.teamHome}</StyledTableCell>
-                        <StyledTableCell align="right">{row.teamAway}</StyledTableCell>
-                        <StyledTableCell align="right">
-                            <Stack alignItems={'center'} direction={'row'} justifyContent={'end'} gap={2}>
-                                {titleCase(row.riskRate)} Risk
-                                <div
-                                    className={css.circleRisk}
-                                    style={{backgroundColor: riskRateColors[row.riskRate]}}
-                                ></div>
-                            </Stack>
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                            <Button
-                                to='/offers/create'
-                                component={RouterLink}
-                                variant='contained'
-                                color='primary'
-                                size='small'
-                                startIcon={<EditIcon/>}>
-                                EDIT OFFER
-                            </Button>
-                        </StyledTableCell>
-                    </StyledTableRow>
-                    <StyledTableRow key={row.actionId}>
-                        <StyledTableCell>#1221</StyledTableCell>
-                        <StyledTableCell align="right" component="th" scope="row">
-                            {row.sport}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">{row.league}</StyledTableCell>
-                        <StyledTableCell align="right">{row.teamHome}</StyledTableCell>
-                        <StyledTableCell align="right">{row.teamAway}</StyledTableCell>
-                        <StyledTableCell align="right">
-                            <Stack alignItems={'center'} direction={'row'} justifyContent={'end'} gap={2}>
-                                {titleCase(row.riskRate)} Risk
-                                <div
-                                    className={css.circleRisk}
-                                    style={{backgroundColor: riskRateColors[row.riskRate]}}
-                                ></div>
-                            </Stack>
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                            <Button
-                                to='/offers/create'
-                                component={RouterLink}
-                                variant='outlined'
-                                disabled
-                                color='primary'
-                                size='small'
-                                startIcon={<DoneAllIcon/>}>
-                                DONE
-                            </Button>
-                        </StyledTableCell>
-                    </StyledTableRow>
                     {
-                        [234897, 324, 1289, 462, 142123].map((item) =>
-                            <StyledTableRow key={row.actionId}>
-                                <StyledTableCell>#{item}</StyledTableCell>
+                        rows.map((item) =>
+                            <StyledTableRow key={item.actionId}>
+                                <StyledTableCell>#{item.actionId}</StyledTableCell>
                                 <StyledTableCell align="right" component="th" scope="row">
-                                    {row.sport}
+                                    {item.sport}
                                 </StyledTableCell>
-                                <StyledTableCell align="right">{row.league}</StyledTableCell>
-                                <StyledTableCell align="right">{row.teamHome}</StyledTableCell>
-                                <StyledTableCell align="right">{row.teamAway}</StyledTableCell>
+                                <StyledTableCell align="right">{item.league}</StyledTableCell>
+                                <StyledTableCell align="right">{item.timeStart}</StyledTableCell>
+                                <StyledTableCell align="right">{item.teamHome}</StyledTableCell>
+                                <StyledTableCell align="right">{item.teamAway}</StyledTableCell>
                                 <StyledTableCell align="right">
                                     <Stack alignItems={'center'} direction={'row'} justifyContent={'end'} gap={2}>
-                                        {titleCase(row.riskRate)} Risk
+                                        {titleCase(item.riskRate)} Risk
                                         <div
                                             className={css.circleRisk}
-                                            style={{backgroundColor: riskRateColors[row.riskRate]}}
+                                            style={{backgroundColor: riskRateColors[item.riskRate]}}
                                         ></div>
                                     </Stack>
                                 </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <Button
-                                        to='/offers/create'
-                                        component={RouterLink}
-                                        variant='contained'
-                                        color='success'
-                                        size='small'
-                                        startIcon={<AddIcon/>}>
-                                        Create Offer
-                                    </Button>
+                                <StyledTableCell>
+                                    <Stack direction={'row'} gap={1} justifyContent={'end'}>
+                                        <Button
+                                            to='/offers/create'
+                                            component={RouterLink}
+                                            variant='contained'
+                                            color={
+                                                item.status === 'create' ? 'success' : 'primary'
+                                            }                                        
+                                            disabled={ item.status === 'activated' }
+                                            size='small'
+                                            startIcon={
+                                                item.status === 'create' ? <AddIcon/> :
+                                                item.status === 'edit' ? <EditIcon/> : <DoneAllIcon/>
+                                            }
+                                        >
+                                            {
+                                                item.status === 'create' ? 'CREATE OFFER' :
+                                                item.status === 'edit' ? 'EDIT OFFER' : 'ACTIVATED'
+                                            }
+                                        </Button>
+                                        {
+                                            item.status === 'activated' &&
+                                            <IconButton
+                                                size='small'
+                                                component={RouterLink}
+                                                to={`/offers/${item.actionId}`}
+                                            >
+                                                <InfoIcon/>
+                                            </IconButton>
+                                        }
+                                    </Stack>
                                 </StyledTableCell>
                             </StyledTableRow>
                         )

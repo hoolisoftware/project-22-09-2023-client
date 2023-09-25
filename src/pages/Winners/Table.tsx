@@ -1,7 +1,9 @@
 import css from './index.module.scss'
 
+import { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import {
+    Button,
     Table,
     TableBody,
     TableCell,
@@ -10,10 +12,14 @@ import {
     TableRow,
     Typography,
     Paper,
+    Link
 } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import { tableCellClasses } from '@mui/material/TableCell';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+
+import PaidModal from './PaidModal'
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -52,58 +58,74 @@ const rows = [
 ]
 
 export default function CustomizedTables() {
+    const [paidDialog, setPaidDialog] = useState<boolean>(false)
+
     return (
-        <TableContainer className={css.tableDesktop} component={Paper}>
-            <Table sx={{ minWidth: 900 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Table №</StyledTableCell>
-                        <StyledTableCell align="center">Result</StyledTableCell>
-                        <StyledTableCell align="right">Offer</StyledTableCell>
-                        <StyledTableCell align="right">Status</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {
-                        rows.map(row =>
-                            <StyledTableRow key={row.tableNumber}>
-                                <StyledTableCell>#{row.tableNumber}</StyledTableCell>
-                                <StyledTableCell align="center" component="th" scope="row">
-                                    {
-                                        row.status === 'paid' && 
+        <>
+            <TableContainer className={css.tableDesktop} component={Paper}>
+                <Table sx={{ minWidth: 900 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Table №</StyledTableCell>
+                            <StyledTableCell align="center">Sport</StyledTableCell>
+                            <StyledTableCell align="center">Teams</StyledTableCell>
+                            <StyledTableCell align="center">Result</StyledTableCell>
+                            <StyledTableCell align="right">Offer</StyledTableCell>
+                            <StyledTableCell align="right">Status</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            rows.map(row =>
+                                <StyledTableRow key={row.tableNumber}>
+                                    <StyledTableCell>#{row.tableNumber}</StyledTableCell>
+                                    <StyledTableCell align="center" component="th" scope="row">
+                                        <Typography color='success'>
+                                            Soccer
+                                        </Typography>
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center" component="th" scope="row">
+                                        <Typography>
+                                            <Typography component={'span'} color='primary'>
+                                                Chelsea
+                                            </Typography>
+                                            &nbsp;VS&nbsp;
+                                            <Typography component={'span'} color='primary'>
+                                                Madrid
+                                            </Typography>
+                                        </Typography>
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center" component="th" scope="row">
                                         <Typography color='success'>
                                             Chelsea
                                         </Typography>
-                                    }
-                                    {
-                                        row.status === 'waiting' &&
-                                        <Typography color='primary'>
-                                            <HourglassBottomIcon/>
-                                        </Typography>
-                                    }
-                                </StyledTableCell>
-                                <StyledTableCell align="right" component="th" scope="row">
-                                    {row.offer}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                        {
-                                            row.status === 'paid' && 
-                                            <Typography color='success'>
-                                                <DoneAllIcon/>
-                                            </Typography>
-                                        }
-                                        {
-                                            row.status === 'waiting' &&
-                                            <Typography color='primary'>
-                                                <HourglassBottomIcon/>
-                                            </Typography>
-                                        }
-                                </StyledTableCell>
-                            </StyledTableRow>
-                        )
-                    }
-                </TableBody>
-            </Table>
-        </TableContainer>
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right" component="th" scope="row">
+                                        <Link to='#' component={RouterLink}>
+                                            {row.offer}
+                                        </Link>
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">
+                                            {
+                                                row.status === 'paid' && 
+                                                <Button color='success' disabled startIcon={<DoneAllIcon/>}>
+                                                    PAID
+                                                </Button>
+                                            }
+                                            {
+                                                row.status === 'waiting' &&
+                                                <Button color='success' variant='outlined' startIcon={<HourglassBottomIcon/>} onClick={ () => setPaidDialog(true) }>
+                                                    WAITING
+                                                </Button>
+                                            }
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            )
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <PaidModal active={paidDialog} setActive={setPaidDialog}/>
+        </>
     );
 }

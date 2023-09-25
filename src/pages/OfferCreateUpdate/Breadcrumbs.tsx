@@ -3,11 +3,16 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 
 
-export default function BasicBreadcrumbs() {
+interface props
+{
+  title: string
+}
+
+export default function BasicBreadcrumbs(props: props) {
   return (
     <Breadcrumbs aria-label="breadcrumb">
       <Link underline="hover" color="inherit" href="#">
-        Dashboard
+        "Valencia Irish Pub"
       </Link>
       <Link
         underline="hover"
@@ -16,7 +21,7 @@ export default function BasicBreadcrumbs() {
       >
         Todays Offers
       </Link>
-      <Typography color="text.primary">Create Offer</Typography>
+      <Typography color="text.primary">{props.title}</Typography>
     </Breadcrumbs>
   );
 }

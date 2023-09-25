@@ -1,11 +1,14 @@
+import css from './index.module.scss'
+
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import CssBaseline from '@mui/material/CssBaseline';
 import {
     AppBar,
     Box,
     Toolbar,
     Typography,
-    IconButton
+    IconButton,
 } from '@mui/material'
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -26,7 +29,8 @@ export default function Header() {
     const [drawer, setDrawer] = useState<boolean>(false)
 
     return <>
-        <Box sx={{ flexGrow: 1 }}>
+        <CssBaseline/>
+        <Box sx={{ flexGrow: 1 }} className={css.header}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton

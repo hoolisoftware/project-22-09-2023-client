@@ -4,11 +4,17 @@ import {
     CardContent,
     Grid,
     Typography,
-    TextField
 } from '@mui/material';
 
 
-export default function BasicGrid() {
+interface props
+{
+    offerId?: string
+}
+
+export default function BasicGrid(props: props) {
+    props.offerId
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
@@ -21,13 +27,9 @@ export default function BasicGrid() {
                                         <Typography variant='h6' gutterBottom>
                                             {item}
                                         </Typography>
-                                        <TextField
-                                            fullWidth
-                                            placeholder="Prize description"
-                                            multiline
-                                            rows={5}
-                                            maxRows={20}
-                                        />
+                                        <Typography>
+                                            {item} lorem ipsum
+                                        </Typography>
                                     </center>
                                 </CardContent>
                             </Card>

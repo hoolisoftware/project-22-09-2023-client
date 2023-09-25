@@ -51,14 +51,15 @@ function createData(
     actionId: number,
     sport: string,
     league: string,
+    timeStart: string,
     teamHome: string,
     teamAway: string,
     riskRate: RiskRate,
 ) {
-    return { actionId, sport, league, teamHome, teamAway, riskRate };
+    return { actionId, sport, league, timeStart, teamHome, teamAway, riskRate };
 }
 
-const row = createData(124, 'Soccer', 'Dream League', 'Tigers', 'Bears', 'medium')
+const row = createData(124, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium')
 
 export default function CustomizedTables() {
     return (
@@ -70,18 +71,20 @@ export default function CustomizedTables() {
                             <StyledTableCell>Action ID</StyledTableCell>
                             <StyledTableCell align="right">Sport</StyledTableCell>
                             <StyledTableCell align="right">League</StyledTableCell>
+                            <StyledTableCell align="right">Start time</StyledTableCell>
                             <StyledTableCell align="right">Home team</StyledTableCell>
                             <StyledTableCell align="right">Away team</StyledTableCell>
                             <StyledTableCell align="right">Risk rate</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <StyledTableRow key={row.actionId}>
+                        <StyledTableRow>
                             <StyledTableCell>#{row.actionId}</StyledTableCell>
                             <StyledTableCell align="right" component="th" scope="row">
                                 {row.sport}
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.league}</StyledTableCell>
+                            <StyledTableCell align="right">{row.timeStart}</StyledTableCell>
                             <StyledTableCell align="right">{row.teamHome}</StyledTableCell>
                             <StyledTableCell align="right">{row.teamAway}</StyledTableCell>
                             <StyledTableCell align="right">
@@ -100,37 +103,37 @@ export default function CustomizedTables() {
             <TableContainer className={css.tableMobile} component={Paper}>
                 <Table aria-label="customized table">
                     <TableBody>
-                        <StyledTableRow key={row.actionId}>
+                        <StyledTableRow>
                             <StyledTableCell>ActionID</StyledTableCell>
                             <StyledTableCell align="right" component="th" scope="row">
                                 #{row.actionId}
                             </StyledTableCell>
                         </StyledTableRow>
-                        <StyledTableRow key={row.actionId}>
+                        <StyledTableRow>
                             <StyledTableCell>Sport</StyledTableCell>
                             <StyledTableCell align="right" component="th" scope="row">
                                 {row.sport}
                             </StyledTableCell>
                         </StyledTableRow>
-                        <StyledTableRow key={row.actionId}>
+                        <StyledTableRow>
                             <StyledTableCell>League</StyledTableCell>
                             <StyledTableCell align="right" component="th" scope="row">
                                 {row.league}
                             </StyledTableCell>
                         </StyledTableRow>
-                        <StyledTableRow key={row.actionId}>
+                        <StyledTableRow>
                             <StyledTableCell>Home team</StyledTableCell>
                             <StyledTableCell align="right" component="th" scope="row">
                                 {row.teamHome}
                             </StyledTableCell>
                         </StyledTableRow>
-                        <StyledTableRow key={row.actionId}>
+                        <StyledTableRow>
                             <StyledTableCell>Away team</StyledTableCell>
                             <StyledTableCell align="right" component="th" scope="row">
                                 {row.teamAway}
                             </StyledTableCell>
                         </StyledTableRow>
-                        <StyledTableRow key={row.actionId}>
+                        <StyledTableRow>
                             <StyledTableCell>Risk rate</StyledTableCell>
                             <StyledTableCell align="right" component="th" scope="row">
                                 <Stack alignItems={'center'} direction={'row'} justifyContent={'end'} gap={2}>
