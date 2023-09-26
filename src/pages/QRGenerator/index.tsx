@@ -3,9 +3,9 @@ import PageLayout from '../../components/PageLayout';
 
 
 export default function Page() {
-    document.title = 'QR Generator'
-
-    return <PageLayout>
+    return <PageLayout
+        title={'QR Generator'}
+    >
         <Container>
             <center>
                 QR generator page

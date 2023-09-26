@@ -6,9 +6,11 @@ import Table from './Table'
 
 
 export default function Page() {
-    document.title = 'Events'
 
-    return <PageLayout>
+    return <PageLayout
+        title={'Events'}
+        breadcrumbs={true}
+    >
         {
             ['25 sep 2023', '28 sep 2023'].map(item =>
                 <Container>

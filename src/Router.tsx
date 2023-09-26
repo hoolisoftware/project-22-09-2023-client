@@ -12,8 +12,11 @@ import QRGenerator from './pages/QRGenerator'
 import Winners from './pages/Winners'
 import AccountSettings from './pages/AccountSettings'
 import UserList from './pages/UserList'
-import BarList from './pages/BarList'
+import UserCreateUpdate from './pages/UserCreateUpdate'
 import BranchList from './pages/BranchList'
+import BranchCreateUpdate from './pages/BranchCreateUpdate'
+import EmployeeCreateUpdate from './pages/EmployeeCreateUpdate'
+
 
 const router = createBrowserRouter([
     {
@@ -30,15 +33,15 @@ const router = createBrowserRouter([
     },
     {
         path: 'offers/:offerId/',
-        element: <OfferDetail title='Offer details'/>
+        element: <OfferDetail/>
     },
     {
         path: 'offers/create/',
-        element: <OfferCreateUpdate title='Create offer'/>
+        element: <OfferCreateUpdate/>
     },
     {
-        path: 'offers/edit/:offerId/',
-        element: <OfferCreateUpdate title='Edit offer'/>
+        path: 'offers/:offerId/update/',
+        element: <OfferCreateUpdate/>
     },
     {
         path: 'events/',
@@ -57,12 +60,32 @@ const router = createBrowserRouter([
         element: <UserList/>
     },
     {
-        path: 'bars/',
-        element: <BarList/>
+        path: 'users/create/',
+        element: <UserCreateUpdate/>
+    },
+    {
+        path: 'users/:userId/update/',
+        element: <UserCreateUpdate/>
     },
     {
         path: 'branches/',
         element: <BranchList/>
+    },
+    {
+        path: 'branches/create',
+        element: <BranchCreateUpdate/>
+    },
+    {
+        path: 'branches/:branchId/update',
+        element: <BranchCreateUpdate/>
+    },
+    {
+        path: 'employees/:branchId/create/',
+        element: <EmployeeCreateUpdate/>
+    },
+    {
+        path: 'employees/:employeeId/update/',
+        element: <EmployeeCreateUpdate/>
     }
 ])
 

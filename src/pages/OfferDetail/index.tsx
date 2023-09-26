@@ -5,28 +5,21 @@ import {
 
 import Container from '../../components/Container'
 import PageLayout from '../../components/PageLayout'
-import Breadcrumb from './Breadcrumbs'
 import ActionInfo from '../../components/ActionInfo'
 import Offer from './Offer'
 
 
-interface props
-{
-    title: string
-}
 
-
-export default function Page(props: props) {
-    document.title = props.title
+export default function Page() {
     const {offerId} = useParams()
     
 
-    return <PageLayout>
-        <Container>
-            <Breadcrumb title={
-                offerId ? `${props.title} #${offerId}` : props.title
-            }/>
-        </Container>
+    return <PageLayout
+        title={`Offer #${offerId} details`}
+        breadcrumbs={[
+            ['Events','/events/']
+        ]}
+    >
         <ActionInfo/>
         <Container>
             <Typography variant='h5' gutterBottom>

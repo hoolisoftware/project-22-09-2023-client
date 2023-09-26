@@ -3,9 +3,9 @@ import PageLayout from '../../components/PageLayout';
 
 
 export default function Page() {
-    document.title = 'Dashboard'
-
-    return <PageLayout>
+    return <PageLayout
+        title={'Dashboard'}
+    >
         <Container>
             <center>
                 Dashboard

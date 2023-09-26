@@ -3,9 +3,9 @@ import PageLayout from '../../components/PageLayout';
 
 
 export default function Page() {
-    document.title = 'History'
-
-    return <PageLayout>
+    return <PageLayout
+        title={'History'}
+    >
         <Container>
             <center>
                 History page

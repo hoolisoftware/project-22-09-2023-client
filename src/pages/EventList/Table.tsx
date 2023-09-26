@@ -85,13 +85,13 @@ export default function CustomizedTables() {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Action ID</StyledTableCell>
-                        <StyledTableCell align="right">Sport</StyledTableCell>
-                        <StyledTableCell align="right">League</StyledTableCell>
-                        <StyledTableCell align="right">Start time</StyledTableCell>
-                        <StyledTableCell align="right">Home team</StyledTableCell>
-                        <StyledTableCell align="right">Away team</StyledTableCell>
-                        <StyledTableCell align="right">Risk rate</StyledTableCell>
-                        <StyledTableCell align="right">Operation</StyledTableCell>
+                        <StyledTableCell>Sport</StyledTableCell>
+                        <StyledTableCell>League</StyledTableCell>
+                        <StyledTableCell>Start time</StyledTableCell>
+                        <StyledTableCell>Home team</StyledTableCell>
+                        <StyledTableCell>Away team</StyledTableCell>
+                        <StyledTableCell>Risk rate</StyledTableCell>
+                        <StyledTableCell align='right' width={100}>Operation</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -99,26 +99,30 @@ export default function CustomizedTables() {
                         rows.map((item) =>
                             <StyledTableRow key={item.actionId}>
                                 <StyledTableCell>#{item.actionId}</StyledTableCell>
-                                <StyledTableCell align="right" component="th" scope="row">
+                                <StyledTableCell component="th" scope="row">
                                     {item.sport}
                                 </StyledTableCell>
-                                <StyledTableCell align="right">{item.league}</StyledTableCell>
-                                <StyledTableCell align="right">{item.timeStart}</StyledTableCell>
-                                <StyledTableCell align="right">{item.teamHome}</StyledTableCell>
-                                <StyledTableCell align="right">{item.teamAway}</StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <Stack alignItems={'center'} direction={'row'} justifyContent={'end'} gap={2}>
-                                        {titleCase(item.riskRate)} Risk
+                                <StyledTableCell>{item.league}</StyledTableCell>
+                                <StyledTableCell>{item.timeStart}</StyledTableCell>
+                                <StyledTableCell>{item.teamHome}</StyledTableCell>
+                                <StyledTableCell>{item.teamAway}</StyledTableCell>
+                                <StyledTableCell>
+                                    <Stack alignItems={'center'} direction={'row'} gap={2}>
                                         <div
                                             className={css.circleRisk}
                                             style={{backgroundColor: riskRateColors[item.riskRate]}}
                                         ></div>
+                                        {titleCase(item.riskRate)} Risk
                                     </Stack>
                                 </StyledTableCell>
                                 <StyledTableCell>
                                     <Stack direction={'row'} gap={1} justifyContent={'end'}>
                                         <Button
-                                            to='/offers/create'
+                                            fullWidth
+                                            to={
+                                                item.status === 'create' ? '/offers/create' :
+                                                '/offers/1/update'
+                                            }
                                             component={RouterLink}
                                             variant='contained'
                                             color={

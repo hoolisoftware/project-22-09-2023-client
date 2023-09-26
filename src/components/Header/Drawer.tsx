@@ -17,11 +17,11 @@ import HistoryIcon from '@mui/icons-material/History';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import LogoutIcon from '@mui/icons-material/Logout';
+import BusinessIcon from '@mui/icons-material/Business';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import { toggleModalBar, toggleModalBranch } from '../../features/modals/modalsReducer';
 import ListItemLink from '../ListItemLink';
-import BusinessIcon from '@mui/icons-material/Business';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 interface props {
     active: boolean
@@ -39,7 +39,9 @@ export default function TemporaryDrawer(props: props) {
         onClick={() => props.setActive(false)}
         onKeyDown={() => props.setActive(false)}
     >
-        <List>
+        <List
+            subheader={<ListSubheader>Current bnrach</ListSubheader>}
+        >
             <ListItemLink to='/events' primary={'Events'} icon={<LocalOfferIcon />}/>
             <ListItemLink to='/winners' primary={'Winners'} icon={<EmojiEventsIcon />}/>
             <ListItemLink to='/history' primary={'History'} icon={<HistoryIcon />}/>
@@ -78,7 +80,7 @@ export default function TemporaryDrawer(props: props) {
         <List
             subheader={<ListSubheader>Administration</ListSubheader>}
         >
-            <ListItemLink to='/bars' primary={'Bars'} icon={<BusinessIcon />}/>
+            <ListItemLink to='/users' primary={'Users'} icon={<BusinessIcon />}/>
             <ListItemLink to='/branches' primary={'Branches'} icon={<LocationOnIcon />}/>
         </List>
         <Divider/>

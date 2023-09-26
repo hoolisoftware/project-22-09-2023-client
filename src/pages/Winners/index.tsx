@@ -4,9 +4,9 @@ import Table from './Table'
 
 
 export default function Page() {
-    document.title = 'Winners'
-
-    return <PageLayout>
+    return <PageLayout
+        title={'Winners'}
+    >
         <Container>
             <Table/>
         </Container>

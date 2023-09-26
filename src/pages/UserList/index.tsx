@@ -1,15 +1,16 @@
 import Container from '../../components/Container'
 import PageLayout from '../../components/PageLayout';
 
+import Table from './Table'
+
 
 export default function Page() {
-    document.title = 'User administration'
-
-    return <PageLayout>
+    return <PageLayout
+        title={'User administration'}
+        breadcrumbs={true}
+    >
         <Container>
-            <center>
-                User administration page
-            </center>
+            <Table/>
         </Container>
     </PageLayout>
 }

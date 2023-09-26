@@ -10,6 +10,9 @@
 			"path": "src/app/"
 		},
 		{
+			"path": "src/global/"
+		},
+		{
 			"path": "src/features/"
 		},
 		{
