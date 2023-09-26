@@ -19,6 +19,7 @@ export default function Page() {
         breadcrumbs={[
             ['Events','/events/']
         ]}
+        back={true}
     >
         <ActionInfo/>
         <Container>
