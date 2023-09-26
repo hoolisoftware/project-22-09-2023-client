@@ -1,5 +1,7 @@
 import css from './index.module.scss'
 
+import { Box } from '@mui/material'
+
 import Header from '../Header'
 import Footer from '../Footer'
 import ChangeBranchModal from '../ChangeBranchModal'
@@ -18,19 +20,20 @@ export default function PageLayout(props: Props)
 {
     document.title = props.title
 
-    return <div className={css.layout}>
-
-        <div>
+    return <>
+        <div className={css.layout}>
             <Header/>
             {
                 (Array.isArray(props.breadcrumbs) || props.breadcrumbs === true) && (
                     <Breadcrumbs back={props.back} title={props.title} breadcrumbs={props.breadcrumbs}/>
                 )
             }
-            {props.children}
-            <ChangeBarModal/>
-            <ChangeBranchModal/>
+            <Box component={'main'}>
+                {props.children}
+                <Footer/>
+            </Box>
         </div>
-        <Footer/>
-    </div>
+        <ChangeBarModal/>
+        <ChangeBranchModal/>
+    </> 
 }
