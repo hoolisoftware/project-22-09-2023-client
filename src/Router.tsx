@@ -9,6 +9,7 @@ import OfferCreateUpdate from './pages/OfferCreateUpdate'
 import OfferDetail from './pages/OfferDetail'
 import EventList from './pages/EventList'
 import QRGenerator from './pages/QRGenerator'
+import QRGeneratorDetail from './pages/QRGeneratorDetail'
 import Winners from './pages/Winners'
 import AccountSettings from './pages/AccountSettings'
 import BarList from './pages/BarList'
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
     {
         path: 'qr-generator/',
         element: <QRGenerator/>
+    },
+    {
+        path: 'qr-generator/:tableNo/',
+        element: <QRGeneratorDetail/>
     },
     {
         path: 'winners/',

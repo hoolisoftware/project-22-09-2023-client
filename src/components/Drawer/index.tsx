@@ -86,7 +86,7 @@ export default function TemporaryDrawer(props: props) {
             <ListItemLink to='/branches' primary={'Branches'} icon={<LocationOnIcon />}/>
         </List>
         <Divider/>
-        <Button sx={{mt: 2}} fullWidth color='error' startIcon={<LogoutIcon />}>Logout</Button>
+        <Button sx={{mt: 2}} fullWidth color='error' startIcon={<LogoutIcon />} onClick={ () => props.setLogoutModal(true) }>Logout</Button>
     </Box>
 
     return <Drawer
