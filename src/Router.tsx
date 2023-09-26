@@ -11,6 +11,8 @@ import EventList from './pages/EventList'
 import QRGenerator from './pages/QRGenerator'
 import Winners from './pages/Winners'
 import AccountSettings from './pages/AccountSettings'
+import BarList from './pages/BarList'
+import BarCreateUpdate from './pages/BarCreateUpdate'
 import UserList from './pages/UserList'
 import UserCreateUpdate from './pages/UserCreateUpdate'
 import BranchList from './pages/BranchList'
@@ -54,6 +56,18 @@ const router = createBrowserRouter([
     {
         path: 'winners/',
         element: <Winners/>
+    },
+    {
+        path: 'bars/',
+        element: <BarList/>
+    },
+    {
+        path: 'bars/create/',
+        element: <BarCreateUpdate/>
+    },
+    {
+        path: 'bars/:barId/update/',
+        element: <BarCreateUpdate/>
     },
     {
         path: 'users/',

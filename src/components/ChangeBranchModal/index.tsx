@@ -12,7 +12,7 @@ import AccountTree from '@mui/icons-material/AccountTree';
 
 import { RootState } from '../../app/store';
 import { toggleModalBranch } from '../../features/modals/modalsReducer';
-import Autocomplete from './AutoComplete'
+import Autocomplete from '../AutocompleteBranch'
 
 
 const style = {

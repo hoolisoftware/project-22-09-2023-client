@@ -12,8 +12,8 @@ import BusinessIcon from '@mui/icons-material/Business';
 
 import { RootState } from '../../app/store';
 import { toggleModalBar } from '../../features/modals/modalsReducer';
-import AutocompleteBranch from '../ChangeBranchModal/AutoComplete'
-import AutoComplete from './AutoComplete'
+import AutocompleteBar from '../AutocompleteBar'
+import AutocompleteBranch from '../AutocompleteBranch'
 
 
 const style = {
@@ -46,8 +46,12 @@ export default function BasicModal() {
               <Typography sx={{mb: 3}} variant="h6" component="h2">
                 Select bar
               </Typography>
-              <AutoComplete selected={selectedBar} setSelected={setSelectedBar}/>
-              <AutocompleteBranch selected={selectedBranch} setSelected={setSelectedBranch}/>
+              <Box sx={{mb: 3}}>
+                <AutocompleteBar selected={selectedBar} setSelected={setSelectedBar}/>
+              </Box>
+              <Box sx={{mb: 3}}>
+                <AutocompleteBranch selected={selectedBranch} setSelected={setSelectedBranch}/>
+              </Box>
               <Button disabled={!selectedBar && !selectedBranch} startIcon={<BusinessIcon/>} variant='contained'>
                 SELECT
               </Button>

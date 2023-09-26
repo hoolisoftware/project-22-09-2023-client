@@ -22,16 +22,18 @@ export default function PageLayout(props: Props)
 
     return <>
         <div className={css.layout}>
-            <Header/>
-            {
-                (Array.isArray(props.breadcrumbs) || props.breadcrumbs === true) && (
-                    <Breadcrumbs back={props.back} title={props.title} breadcrumbs={props.breadcrumbs}/>
-                )
-            }
-            <Box component={'main'}>
-                {props.children}
-                <Footer/>
-            </Box>
+            <div>
+                <Header/>
+                <Box component={'main'}>
+                    {
+                        (Array.isArray(props.breadcrumbs) || props.breadcrumbs === true) && (
+                            <Breadcrumbs back={props.back} title={props.title} breadcrumbs={props.breadcrumbs}/>
+                        )
+                    }
+                    {props.children}
+                </Box>
+            </div>
+            <Footer/>
         </div>
         <ChangeBarModal/>
         <ChangeBranchModal/>

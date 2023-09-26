@@ -67,11 +67,11 @@ export default function CustomizedTables() {
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>Table №</StyledTableCell>
-                            <StyledTableCell align="center">Sport</StyledTableCell>
-                            <StyledTableCell align="center">Teams</StyledTableCell>
-                            <StyledTableCell align="center">Result</StyledTableCell>
-                            <StyledTableCell align="right">Offer</StyledTableCell>
-                            <StyledTableCell align="right">Status</StyledTableCell>
+                            <StyledTableCell>Sport</StyledTableCell>
+                            <StyledTableCell>Teams</StyledTableCell>
+                            <StyledTableCell>Result</StyledTableCell>
+                            <StyledTableCell>Offer</StyledTableCell>
+                            <StyledTableCell align="right" width={100}>Status</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -79,12 +79,12 @@ export default function CustomizedTables() {
                             rows.map(row =>
                                 <StyledTableRow key={row.tableNumber}>
                                     <StyledTableCell>#{row.tableNumber}</StyledTableCell>
-                                    <StyledTableCell align="center" component="th" scope="row">
+                                    <StyledTableCell component="th" scope="row">
                                         <Typography color='success'>
                                             Soccer
                                         </Typography>
                                     </StyledTableCell>
-                                    <StyledTableCell align="center" component="th" scope="row">
+                                    <StyledTableCell component="th" scope="row">
                                         <Typography>
                                             <Typography component={'span'} color='primary'>
                                                 Chelsea
@@ -95,12 +95,12 @@ export default function CustomizedTables() {
                                             </Typography>
                                         </Typography>
                                     </StyledTableCell>
-                                    <StyledTableCell align="center" component="th" scope="row">
+                                    <StyledTableCell component="th" scope="row">
                                         <Typography color='success'>
                                             Chelsea
                                         </Typography>
                                     </StyledTableCell>
-                                    <StyledTableCell align="right" component="th" scope="row">
+                                    <StyledTableCell component="th" scope="row">
                                         <Link to='#' component={RouterLink}>
                                             {row.offer}
                                         </Link>
@@ -108,13 +108,13 @@ export default function CustomizedTables() {
                                     <StyledTableCell align="right">
                                             {
                                                 row.status === 'paid' && 
-                                                <Button color='success' disabled startIcon={<DoneAllIcon/>}>
+                                                <Button fullWidth color='success' disabled startIcon={<DoneAllIcon/>}>
                                                     PAID
                                                 </Button>
                                             }
                                             {
                                                 row.status === 'waiting' &&
-                                                <Button color='success' variant='outlined' startIcon={<HourglassBottomIcon/>} onClick={ () => setPaidDialog(true) }>
+                                                <Button fullWidth color='success' variant='outlined' startIcon={<HourglassBottomIcon/>} onClick={ () => setPaidDialog(true) }>
                                                     WAITING
                                                 </Button>
                                             }

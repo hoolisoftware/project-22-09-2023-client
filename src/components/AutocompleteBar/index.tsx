@@ -49,7 +49,7 @@ export default function Asynchronous(props:Props) {
 
     return (
         <Autocomplete
-            sx={{mb:3}}
+            // sx={{mb:3}}
             fullWidth
             open={open}
             onOpen={() => {

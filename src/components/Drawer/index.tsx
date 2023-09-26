@@ -19,6 +19,7 @@ import QrCodeIcon from '@mui/icons-material/QrCode';
 import LogoutIcon from '@mui/icons-material/Logout';
 import BusinessIcon from '@mui/icons-material/Business';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import GroupIcon from '@mui/icons-material/Group';
 
 import { toggleModalBar, toggleModalBranch } from '../../features/modals/modalsReducer';
 import ListItemLink from '../ListItemLink';
@@ -80,7 +81,8 @@ export default function TemporaryDrawer(props: props) {
         <List
             subheader={<ListSubheader>Administration</ListSubheader>}
         >
-            <ListItemLink to='/users' primary={'Users'} icon={<BusinessIcon />}/>
+            <ListItemLink to='/users' primary={'Users'} icon={<GroupIcon />}/>
+            <ListItemLink to='/bars' primary={'Bars'} icon={<BusinessIcon />}/>
             <ListItemLink to='/branches' primary={'Branches'} icon={<LocationOnIcon />}/>
         </List>
         <Divider/>

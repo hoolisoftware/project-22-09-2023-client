@@ -15,7 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { RootState } from '../../app/store';
 import { toggleTheme } from '../../features/theme/themeReducer';
 import Account from './Account'
-import Drawer from './Drawer'
+import Drawer from '../Drawer'
 import LogoutModal from './LogoutModal'
 
 
@@ -26,7 +26,7 @@ export default function DrawerAppBar() {
     const [drawer, setDrawer] = useState<boolean>(false)
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <>
             <AppBar component={'nav'}>
                 <Toolbar>
                     <IconButton
@@ -53,6 +53,6 @@ export default function DrawerAppBar() {
             <Toolbar />
             <LogoutModal active={logoutModal} setActive={setLogoutModal}/>
             <Drawer {...{setLogoutModal}} active={drawer} setActive={setDrawer}/>
-        </Box>
+        </>
     );
 }

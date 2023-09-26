@@ -6,7 +6,7 @@ import {
 } from "@mui/material"
 
 import type { Branch } from '@global/models'
-import AutoComplete from '../../components/ChangeBarModal/AutoComplete'
+import AutoComplete from '../../components/AutocompleteBar'
 
 
 interface Props
