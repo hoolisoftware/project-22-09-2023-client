@@ -26,7 +26,7 @@ export default function Page() {
                     Table №1
                 </Typography>  
                 <Box my={2}>
-                    <RouterLink to='/'>
+                    <RouterLink to='/get-offer/12/12/'>
                             <QRCode value="https://hoolisftoware.xyz" style={{width: '35vh', height: '35vh', margin: '0 auto'}}/>
                     </RouterLink>
                 </Box>

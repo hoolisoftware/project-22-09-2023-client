@@ -5,19 +5,27 @@ import Prediction from './Prediction'
 
 import Container from '../Container'
 
+interface Props
+{
+    hidePrediction?: boolean
+}
 
-export default function ActionInfo() {
+
+export default function ActionInfo(props: Props) {
     return (
         <>
             <Container>
                 <CardAction />
             </Container>
-            <Container>
-                <Typography variant='h5' gutterBottom>
-                    Prediction
-                </Typography>
-                <Prediction />
-            </Container>
+            {
+                !props.hidePrediction &&
+                <Container>
+                    <Typography variant='h5' gutterBottom>
+                        Prediction
+                    </Typography>
+                    <Prediction />
+                </Container>
+            }
         </>
     )
 }

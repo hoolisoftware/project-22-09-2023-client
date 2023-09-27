@@ -1,3 +1,4 @@
+import { Link as RouterLink } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -26,7 +27,11 @@ export default function AlertDialog(props: props) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={ () => props.setActive(false) }>Cancel</Button>
-                <Button autoFocus>
+                <Button 
+                    component={RouterLink}
+                    to='/login/'
+                    autoFocus
+                >
                     Logout
                 </Button>
             </DialogActions>

@@ -19,9 +19,16 @@ import UserCreateUpdate from './pages/UserCreateUpdate'
 import BranchList from './pages/BranchList'
 import BranchCreateUpdate from './pages/BranchCreateUpdate'
 import EmployeeCreateUpdate from './pages/EmployeeCreateUpdate'
+import Login from './pages/Login'
+import GetOfferList from '@pages/GetOfferList'
+import GetOfferDetail from '@/pages/GetOfferDetail'
 
 
 const router = createBrowserRouter([
+    {
+        path: 'login/',
+        element: <Login/>
+    },
     {
         path: '/',
         element: <Dashboard/>
@@ -105,6 +112,14 @@ const router = createBrowserRouter([
     {
         path: 'employees/:employeeId/update/',
         element: <EmployeeCreateUpdate/>
+    },
+    {
+        path: 'get-offer/:branchId/:tableNo/',
+        element: <GetOfferList/>
+    },
+    {
+        path: 'get-offer/:branchId/:tableNo/submit',
+        element: <GetOfferDetail/>
     }
 ])
 

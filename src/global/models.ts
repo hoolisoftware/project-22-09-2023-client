@@ -34,3 +34,15 @@ export interface Branch
     address: string
     tables: number
 }
+
+export interface HistoryRecord
+{
+    date: string
+    sport: string
+    league: string
+    teamHome: string
+    teamAway: string
+    tableNumber: number
+    riskRate: 'low' | 'medium' | 'high'
+    result: 'won' | 'loose' | 'pending'
+}
