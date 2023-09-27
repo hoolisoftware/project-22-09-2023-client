@@ -22,14 +22,17 @@ export default function Page() {
 
     return <>
         <Container>
-            <Box mb={3}>
-                <Button
-                    component={RouterLink}
-                    to={'/get-offer/12/12/'}
-                >
-                    {'<'} Back
-                </Button>
-            </Box>
+            {
+                !predicted &&
+                <Box mb={3}>
+                    <Button
+                        component={RouterLink}
+                        to={'/get-offer/12/12/'}
+                    >
+                        {'<'} Back
+                    </Button>
+                </Box>
+            }
             <Box mb={3}>
                 <center>
                     <Typography>Make prediction and get your personal offer</Typography>
