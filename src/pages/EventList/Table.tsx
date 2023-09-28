@@ -1,46 +1,28 @@
 import css from './index.module.scss'
 
-import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import {
     Button,
     IconButton,
     Table,
     TableBody,
-    TableCell,
     TableContainer,
     TableHead,
     TableRow,
+    TextField,
     Paper,
     Stack
 } from '@mui/material'
-import { tableCellClasses } from '@mui/material/TableCell';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import InfoIcon from '@mui/icons-material/Info';
+import dayjs from 'dayjs';
 
+import { StyledTableCell, StyledTableRow } from '@/components/Table';
 import { titleCase } from '../../utils/string';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
+import { InsertEmoticon } from '@mui/icons-material';
 
 interface RiskRateColors
 {
@@ -59,23 +41,25 @@ type RiskRate = keyof RiskRateColors
 
 function createData(
     actionId: number,
+    date: dayjs.Dayjs,
     sport: string,
     league: string,
+    country: string,
     timeStart: string,
     teamHome: string,
     teamAway: string,
     riskRate: RiskRate,
     status: 'create' | 'edit' | 'activated'
 ) {
-    return { actionId, sport, league, timeStart, teamHome, teamAway, riskRate, status };
+    return { actionId, date, sport, country, league, timeStart, teamHome, teamAway, riskRate, status };
 }
 
 const rows = [
-    createData(124, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
-    createData(125, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'create'),
-    createData(126, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'low', 'activated'),
-    createData(127, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
-    createData(128, 'Soccer', 'Dream League', '12:30', 'Tigers', 'Bears', 'high', 'edit'),
+    createData(124, dayjs('03.06.2002'),'Soccer', 'USA', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
+    createData(125, dayjs('02.06.2002'),'Soccer', 'USA', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'create'),
+    createData(126, dayjs('02.06.2002'),'Soccer', 'USA', 'Dream League', '12:30', 'Tigers', 'Bears', 'low', 'activated'),
+    createData(127, dayjs('02.06.2002'),'Soccer', 'USA', 'Dream League', '12:30', 'Tigers', 'Bears', 'medium', 'edit'),
+    createData(128, dayjs('02.06.2002'),'Soccer', 'USA', 'Dream League', '12:30', 'Tigers', 'Bears', 'high', 'edit'),
 ]
 
 export default function CustomizedTables() {
@@ -84,8 +68,18 @@ export default function CustomizedTables() {
             <Table sx={{ minWidth: 1000 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
+                        <StyledTableCell width={150}>
+                            <DatePicker
+                                label='date'
+                                defaultValue={dayjs('02.06.2002')}
+                                slotProps={{ textField: { size: 'small' } }}
+                            />
+                        </StyledTableCell>
                         <StyledTableCell>Action ID</StyledTableCell>
                         <StyledTableCell>Sport</StyledTableCell>
+                        <StyledTableCell width={100}>
+                            <TextField size='small' label='Country'/>
+                        </StyledTableCell>
                         <StyledTableCell>League</StyledTableCell>
                         <StyledTableCell>Start time</StyledTableCell>
                         <StyledTableCell>Home team</StyledTableCell>
@@ -98,11 +92,15 @@ export default function CustomizedTables() {
                     {
                         rows.map((item) =>
                             <StyledTableRow key={item.actionId}>
+                                <StyledTableCell>{item.date.toDate().getMonth()}.{item.date.toDate().getDate()}.{item.date.toDate().getFullYear()}</StyledTableCell>
                                 <StyledTableCell>#{item.actionId}</StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
                                     {item.sport}
                                 </StyledTableCell>
                                 <StyledTableCell>{item.league}</StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    {item.country}
+                                </StyledTableCell>
                                 <StyledTableCell>{item.timeStart}</StyledTableCell>
                                 <StyledTableCell>{item.teamHome}</StyledTableCell>
                                 <StyledTableCell>{item.teamAway}</StyledTableCell>
