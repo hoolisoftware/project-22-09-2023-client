@@ -22,7 +22,6 @@ import dayjs from 'dayjs';
 
 import { StyledTableCell, StyledTableRow } from '@/components/Table';
 import { titleCase } from '../../utils/string';
-import { InsertEmoticon } from '@mui/icons-material';
 
 interface RiskRateColors
 {
