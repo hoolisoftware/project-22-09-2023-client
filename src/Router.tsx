@@ -22,104 +22,105 @@ import EmployeeCreateUpdate from './pages/EmployeeCreateUpdate'
 import Login from './pages/Login'
 import GetOfferList from '@pages/GetOfferList'
 import GetOfferDetail from '@/pages/GetOfferDetail'
+import Page from '@components/Page'
 
 
 const router = createBrowserRouter([
     {
         path: 'login/',
-        element: <Login/>
+        element: <Page page={<Login/>}/>
     },
     {
         path: '/',
-        element: <Dashboard/>
+        element: <Page protected page={<Dashboard/>}/>
     },
     {
         path: 'account/settings/',
-        element: <AccountSettings/>
+        element: <Page protected page={<AccountSettings/>}/>
     },
     {
         path: 'history/',
-        element: <History/>
+        element: <Page protected page={<History/>}/>
     },
     {
         path: 'offers/:offerId/',
-        element: <OfferDetail/>
+        element: <Page protected page={<OfferDetail/>}/>
     },
     {
         path: 'offers/create/',
-        element: <OfferCreateUpdate/>
+        element: <Page protected page={<OfferCreateUpdate/>}/>
     },
     {
         path: 'offers/:offerId/update/',
-        element: <OfferCreateUpdate/>
+        element: <Page protected page={<OfferCreateUpdate/>}/>
     },
     {
         path: 'events/',
-        element: <EventList/>
+        element: <Page protected page={<EventList/>}/>
     },
     {
         path: 'qr-generator/',
-        element: <QRGenerator/>
+        element: <Page protected page={<QRGenerator/>}/>
     },
     {
         path: 'qr-generator/:tableNo/',
-        element: <QRGeneratorDetail/>
+        element: <Page protected page={<QRGeneratorDetail/>}/>
     },
     {
         path: 'winners/',
-        element: <Winners/>
+        element: <Page protected page={<Winners/>}/>
     },
     {
         path: 'bars/',
-        element: <BarList/>
+        element: <Page protected page={<BarList/>}/>
     },
     {
         path: 'bars/create/',
-        element: <BarCreateUpdate/>
+        element: <Page protected page={<BarCreateUpdate/>}/>
     },
     {
         path: 'bars/:barId/update/',
-        element: <BarCreateUpdate/>
+        element: <Page protected page={<BarCreateUpdate/>}/>
     },
     {
         path: 'users/',
-        element: <UserList/>
+        element: <Page protected page={<UserList/>}/>
     },
     {
         path: 'users/create/',
-        element: <UserCreateUpdate/>
+        element: <Page protected page={<UserCreateUpdate/>}/>
     },
     {
         path: 'users/:userId/update/',
-        element: <UserCreateUpdate/>
+        element: <Page protected page={<UserCreateUpdate/>}/>
     },
     {
         path: 'branches/',
-        element: <BranchList/>
+        element: <Page protected page={<BranchList/>}/>
     },
     {
         path: 'branches/create',
-        element: <BranchCreateUpdate/>
+        element: <Page protected page={<BranchCreateUpdate/>}/>
     },
     {
         path: 'branches/:branchId/update',
-        element: <BranchCreateUpdate/>
+        element: <Page protected page={<BranchCreateUpdate/>}/>
     },
     {
         path: 'employees/:branchId/create/',
-        element: <EmployeeCreateUpdate/>
+        element: <Page protected page={<EmployeeCreateUpdate/>}/>
     },
     {
         path: 'employees/:employeeId/update/',
-        element: <EmployeeCreateUpdate/>
+        element: <Page protected page={<EmployeeCreateUpdate/>}/>
     },
     {
         path: 'get-offer/:branchId/:tableNo/',
-        element: <GetOfferList/>
+        element: <Page protected page={<GetOfferList/>}/>
     },
     {
         path: 'get-offer/:branchId/:tableNo/submit',
-        element: <GetOfferDetail/>
+        element: <Page protected page={<GetOfferDetail/>}/>
     }
 ])
 

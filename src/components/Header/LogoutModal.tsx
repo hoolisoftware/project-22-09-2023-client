@@ -1,9 +1,11 @@
-import { Link as RouterLink } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+
+import { useAuth } from '@/hooks/useAuth';
+
 
 interface props {
     active: boolean
@@ -12,6 +14,7 @@ interface props {
 
 
 export default function AlertDialog(props: props) {
+    const { setToken } = useAuth()
 
     return (
         <Dialog
@@ -28,8 +31,7 @@ export default function AlertDialog(props: props) {
             <DialogActions>
                 <Button onClick={ () => props.setActive(false) }>Cancel</Button>
                 <Button 
-                    component={RouterLink}
-                    to='/login/'
+                    onClick={ () => setToken() }
                     autoFocus
                 >
                     Logout

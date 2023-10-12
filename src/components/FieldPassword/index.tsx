@@ -13,6 +13,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 interface Props
 {
    label: string 
+   required?: boolean
+   name?: string
 }
 
 export default function PasswordInput(props: Props) {
@@ -30,7 +32,9 @@ export default function PasswordInput(props: Props) {
             <InputLabel>{props.label}</InputLabel>
             <OutlinedInput
                 id="outlined-adornment-password"
+                required={props.required}
                 type={showPassword ? 'text' : 'password'}
+                name={props.name}
                 endAdornment={
                     <InputAdornment position="end">
                     <IconButton

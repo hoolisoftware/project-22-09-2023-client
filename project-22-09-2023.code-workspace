@@ -13,6 +13,12 @@
 			"path": "src/global/"
 		},
 		{
+			"path": "src/provider/"
+		},
+		{
+			"path": "src/hooks/"
+		},
+		{
 			"path": "src/features/"
 		},
 		{
