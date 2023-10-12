@@ -11,6 +11,7 @@ import {
 import AccountTree from '@mui/icons-material/AccountTree';
 
 import { RootState } from '../../app/store';
+import { APIListBranch } from '@/global/models';
 import { toggleModalBranch } from '../../features/modals/modalsReducer';
 import Autocomplete from '../AutocompleteBranch'
 
@@ -28,7 +29,7 @@ const style = {
 export default function BasicModal() {
   const dispatch = useDispatch()
   const active = useSelector((state: RootState) => state.modals.modalBranch)
-  const [selected, setSelected] = useState<boolean>(false)
+  const [selected, setSelected] = useState<APIListBranch|null>(null)
 
   return (
     <div>

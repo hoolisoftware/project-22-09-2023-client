@@ -1,6 +1,6 @@
 import css from './index.module.scss'
 
-import axios from 'axios'
+import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { Navigate  } from 'react-router-dom'
 import {
@@ -14,9 +14,9 @@ import {
 } from '@mui/material'
 
 import { useAuth } from '@/hooks/useAuth'
+import { tokenInstance } from '@/hooks/agent'
 import Footer from '@components/Footer'
 import PasswordField from '@/components/FieldPassword'
-import { useState } from 'react'
 
 
 
@@ -26,7 +26,7 @@ export default function PageLayout()
 
     const mutation = useMutation({
         mutationFn: async (credentials: FormData) => {
-            return await axios.post('http://localhost:8000/api/token/', credentials)
+            return await tokenInstance.post('/', credentials)
         },
         onSuccess: (res) => {setToken(res.data.access); setTokenRefresh(res.data.refresh)},
         onError: () => setError('You entered wrong credentials or something went wrong. Please try again or contact administrator!')

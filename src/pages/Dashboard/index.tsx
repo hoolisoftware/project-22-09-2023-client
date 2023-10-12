@@ -5,7 +5,7 @@ import PageLayout from '../../components/PageLayout';
 
 
 export default function Page() {
-    const { token } = useAuth()
+    const { token, tokenRefresh } = useAuth()
 
     return <PageLayout
         title={'Dashboard'}
@@ -21,7 +21,7 @@ export default function Page() {
             <div>
                 JWT Token Refresh :
                 <pre style={{ padding: 10, width: '100%', overflowX: 'scroll'}}>
-                    {token}
+                    {tokenRefresh}
                 </pre>
             </div>
         </Container>

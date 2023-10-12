@@ -9,20 +9,20 @@ import {
   } from '@mui/material'
   import { Link as RouterLink } from 'react-router-dom';
   
-  import type { Bar } from '@/global/models';
+  import { useOrganizations } from '@/hooks/agent';
+  import type { APIListOrganization } from '@/global/models';
   import { StyledTableCell, StyledTableRow } from '@/components/Table';
   
   import EditIcon from '@mui/icons-material/Edit';
-  import AddIcon from '@mui/icons-material/Add';
+  import AddIcon from '@mui/icons-material/Add';  
   
-  
-  const rows: Bar[] = [
-    { id: 1, name: 'Burger King', branches: 34 },
-    { id: 2, name: 'KFC', branches: 55 },
-    { id: 3, name: 'Mc Donalds', branches: 12 }
-  ];
-  
+
   export default function CustomizedTables() {
+    const { data, isLoading, error } = useOrganizations()
+
+    if (isLoading) return 'loading...'
+    if (error instanceof Error) return error.message
+
     return (
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -47,16 +47,16 @@ import {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.id}>
+            {Array.isArray(data?.results) && data.results.map((item: APIListOrganization) => (
+              <StyledTableRow key={item.id}>
                 <StyledTableCell component="th" scope="row">
-                  {row.id}
+                  {item.id}
                 </StyledTableCell>
-                <StyledTableCell>{row.name}</StyledTableCell>
-                <StyledTableCell>{row.branches}</StyledTableCell>
+                <StyledTableCell>{item.name}</StyledTableCell>
+                <StyledTableCell>{item.branches_count}</StyledTableCell>
                 <StyledTableCell align="right">
                   <Button
-                    to={`/bars/${row.id}/update/`}
+                    to={`/bars/${item.id}/update/`}
                     component={RouterLink}
                     startIcon={<EditIcon/>}
                     size='small'

@@ -10,7 +10,7 @@ interface Props
 }
 
 export default function Page(props: Props) {
-    const { token } = useAuth();
+    const { token, tokenRefresh } = useAuth();
 
     if (props.protected && !token) return <Navigate to="/login/" />
 

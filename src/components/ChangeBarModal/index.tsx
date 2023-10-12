@@ -9,9 +9,12 @@ import {
   CardContent
 } from '@mui/material'
 import BusinessIcon from '@mui/icons-material/Business';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
+import type { APIListOrganization, APIListBranch } from '@/global/models';
 import { RootState } from '../../app/store';
 import { toggleModalBar } from '../../features/modals/modalsReducer';
+import { setOrganization, setBranch } from '@/features/filters/filtersReducer';
 import AutocompleteBar from '../AutocompleteBar'
 import AutocompleteBranch from '../AutocompleteBranch'
 
@@ -29,8 +32,9 @@ const style = {
 export default function BasicModal() {
   const dispatch = useDispatch()
   const active = useSelector((state: RootState) => state.modals.modalBar)
-  const [selectedBar, setSelectedBar] = useState<boolean>(false)
-  const [selectedBranch, setSelectedBranch] = useState<boolean>(false)
+  const filters = useSelector((state: RootState) => state.filters)
+  const [selectedOrganization, setSelectedOrganization] = useState<APIListOrganization|null>(null)
+  const [selectedBranch, setSelectedBranch] = useState<APIListBranch|null>(null)
 
   return (
     <div>
@@ -43,16 +47,34 @@ export default function BasicModal() {
         <Box sx={style}>
           <Card>
             <CardContent>
+              <Box>
+                <Button startIcon={<BusinessIcon/>} fullWidth disabled>
+                  { filters.organization?.name }
+                </Button>
+              </Box>
+              <Box>
+                <Button startIcon={<LocationOnIcon/>} disabled>
+                  { filters.branch?.address }
+                </Button>
+              </Box>
               <Typography sx={{mb: 3}} variant="h6" component="h2">
                 Select bar
               </Typography>
               <Box sx={{mb: 3}}>
-                <AutocompleteBar selected={selectedBar} setSelected={setSelectedBar}/>
+                <AutocompleteBar selected={selectedOrganization} setSelected={setSelectedOrganization}/>
               </Box>
               <Box sx={{mb: 3}}>
                 <AutocompleteBranch selected={selectedBranch} setSelected={setSelectedBranch}/>
               </Box>
-              <Button disabled={!selectedBar && !selectedBranch} startIcon={<BusinessIcon/>} variant='contained'>
+              <Button
+                disabled={!selectedOrganization && !selectedBranch}
+                startIcon={<BusinessIcon/>}
+                variant='contained'
+                onClick={ () => {
+                  dispatch(setOrganization(selectedOrganization))
+                  dispatch(setBranch(selectedBranch))
+                }}
+              >
                 SELECT
               </Button>
             </CardContent>

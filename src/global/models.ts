@@ -1,3 +1,19 @@
+export interface APIListOrganization
+{
+    id: number
+    name: string
+    created: string
+    branches_count: number 
+}
+
+export interface APIListBranch
+{
+    id: number
+    address: string
+}
+
+// ---
+
 export interface Event
 {
     id: number
