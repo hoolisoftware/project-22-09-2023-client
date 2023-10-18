@@ -1,75 +1,42 @@
-import {
-    Button,
-    Table,
-    TableBody,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper
-  } from '@mui/material'
-  import { Link as RouterLink } from 'react-router-dom';
-  
-  import type { Branch } from '@/global/models';
-  import { StyledTableCell, StyledTableRow } from '@/components/Table';
-  
-  import EditIcon from '@mui/icons-material/Edit';
-  import AddIcon from '@mui/icons-material/Add';
-  
-  
-  const rows: Branch[] = [
-    { id: 1, address: 'Астраханская область, город Клин, наб. Ломоносова, 15', tables: 50 },
-    { id: 2, address: 'Вологодская область, город Серебряные Пруды, бульвар Чехова, 62', tables: 12 },
-    { id: 3, address: 'Ивановская область, город Лотошино, шоссе Славы, 01', tables: 56 }
-  ];
-  
-  export default function CustomizedTables() {
+import type { APIBranch, APIOrganization } from '@/global/models';
+import { useBranches } from '@/hooks/use-query';
+import TableObject from '@components/TableObject'
+
+
+export default function CustomizedTables() {
+    const data = useBranches()
+
     return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell width={100}>ID</StyledTableCell>
-              <StyledTableCell>Address</StyledTableCell>
-              <StyledTableCell>Tables amount</StyledTableCell>
-              <StyledTableCell align="right" width={200}>
-                <Button
-                  to='/branches/create/'
-                  component={RouterLink}
-                  fullWidth
-                  size='small'
-                  variant='contained'
-                  color='success'
-                  startIcon={<AddIcon/>}
-                >
-                  CREATE
-                </Button>
-              </StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.id}>
-                <StyledTableCell component="th" scope="row">
-                  {row.id}
-                </StyledTableCell>
-                <StyledTableCell>{row.address}</StyledTableCell>
-                <StyledTableCell>{row.tables}</StyledTableCell>
-                <StyledTableCell align="right">
-                  <Button
-                    to={`/branches/${row.id}/update/`}
-                    component={RouterLink}
-                    startIcon={<EditIcon/>}
-                    size='small'
-                    variant='contained'
-                    fullWidth
-                  >
-                    EDIT
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+        <TableObject
+            data={data}
+            availableMethods={['create', 'retrieve', 'update', 'delete']}
+            urlCreate='/branches/create/'
+            getUrlUpdate={(item: APIBranch) => `/branches/${item.id}/update/`}
+            getModalDeleteObjectString={(item: APIBranch) => `branch "${item.address}"`}
+            columns={
+                [
+                    {
+                        label: 'ID',
+                        field: 'id',
+                        width: 50
+                    },
+                    {
+                        label: 'Organization',
+                        field: 'organization',
+                        render: (field: APIOrganization) => field.name,
+                        width: 100
+                    },
+                    {
+                        label: 'Branch address',
+                        field: 'address',
+                    },
+                    {
+                        label: 'Created',
+                        field: 'created',
+                        width: 200,
+                    }
+                ]
+            }
+        />
+    )
+}

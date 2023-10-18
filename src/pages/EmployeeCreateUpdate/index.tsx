@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import type { User } from '@global/models'
 import Container from '../../components/Container'
-import PageLayout from '../../components/PageLayout';
+import PageLayout from '../../components/ProtectedPageLayout';
 import Form from './Form'
 
 

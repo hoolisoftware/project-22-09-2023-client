@@ -1,78 +1,43 @@
-import {
-  Button,
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper
-} from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom';
-
-import type { User } from '@/global/models';
-import { StyledTableCell, StyledTableRow } from '@/components/Table';
-
-import EditIcon from '@mui/icons-material/Edit';
-import AddIcon from '@mui/icons-material/Add';
-
-
-const rows: User[] = [
-  { id: 1, username: 'lama', barname: 'Burger King', role: 'superadmin' },
-  { id: 2, username: 'hoolisoftware', barname: 'Burger King', role: 'superadmin' },
-  { id: 3, username: 'jfiow', barname: 'Burger King', role: 'admin' },
-  { id: 4, username: 'vanjiro', barname: 'Burger King', role: 'staff' },  
-];
+import { useUsers } from '@/hooks/use-query';
+import TableObject from '@components/TableObject'
+import { APIUser } from '@/global/models';
 
 export default function CustomizedTables() {
+  const data = useUsers()
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell width={100}>ID</StyledTableCell>
-            <StyledTableCell>Bar Name</StyledTableCell>
-            <StyledTableCell>Username</StyledTableCell>
-            <StyledTableCell>Role</StyledTableCell>
-            <StyledTableCell align="right" width={200}>
-              <Button
-                to='/users/create/'
-                component={RouterLink}
-                fullWidth
-                size='small'
-                variant='contained'
-                color='success'
-                startIcon={<AddIcon/>}
-              >
-                CREATE
-              </Button>
-            </StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.id}
-              </StyledTableCell>
-              <StyledTableCell>{row.barname}</StyledTableCell>
-              <StyledTableCell>{row.username}</StyledTableCell>
-              <StyledTableCell>{row.role}</StyledTableCell>
-              <StyledTableCell align="right">
-                <Button
-                  to='/users/1/update/'
-                  component={RouterLink}
-                  startIcon={<EditIcon/>}
-                  size='small'
-                  variant='contained'
-                  fullWidth
-                >
-                  EDIT
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+    <TableObject
+      data={data}
+      availableMethods={['create', 'retrieve', 'update', 'delete']}
+      urlCreate='/users/create/'
+      getUrlUpdate={ (item: APIUser) => `/users/${item.id}/update/` }
+      getModalDeleteObjectString={ (item: APIUser) => `user "${item.username}"` }
+      columns={
+        [
+          {
+            label: 'ID',
+            field: 'id',
+            width: 100
+          },
+          {
+            label: 'Username',
+            field: 'username',
+            width: 200
+          },
+          {
+            label: 'User role',
+            field: 'role',
+            width: 100,
+            render: (field: string) => field || '-'
+          },
+          {
+            label: 'Created at',
+            field: 'created',
+            width: 200
+          }
+        ]
+      }
+    />
+  )
+
 }

@@ -8,7 +8,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 import Container from '../../components/Container'
-import PageLayout from '../../components/PageLayout';
+import PageLayout from '../../components/ProtectedPageLayout';
 
 
 

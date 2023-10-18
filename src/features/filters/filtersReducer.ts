@@ -1,19 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type {
-    APIListOrganization,
-    APIListBranch
+    APIOrganization,
+    APIBranch
 } from '@/global/models'
-import localforage from 'localforage'
-
 
 interface FiltersState {
-    organization: APIListOrganization | null,
-    branch: APIListBranch | null
+    organization: APIOrganization,
+    branch: APIBranch
 }
 
 const initialState: FiltersState = {
-    organization: await localforage.getItem('organization') || null,
-    branch: await localforage.getItem('branch') || null
+    organization: JSON.parse(localStorage.getItem('organization')||'false'),
+    branch: JSON.parse(localStorage.getItem('branch')||'false')
 }
 
 export const modalSlice = createSlice({
@@ -21,11 +19,11 @@ export const modalSlice = createSlice({
     initialState,
     reducers: {
         setOrganization: (state, action) => {
-            localforage.setItem('organization', action.payload)
+            localStorage.setItem('organization', JSON.stringify(action.payload))
             state.organization = action.payload
         },
         setBranch: (state, action) => {
-            localforage.setItem('branch', action.payload)
+            localStorage.setItem('branch', JSON.stringify(action.payload))
             state.branch = action.payload
         },
     },

@@ -1,59 +1,58 @@
-import { useState } from 'react'
+import { AxiosError } from "axios";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import {
-    Box,
-    Button,
-    Grid,
-    TextField
-} from "@mui/material"
+	Grid,
+} from "@mui/material";
 
-import type { User } from '@global/models'
-import AutocompleteBar from '@components/AutocompleteBar'
-import AutocompleteBranch from '@components/AutocompleteBranch'
-import PasswordInput from "./PasswordInput"
-import RoleSelect from './RoleRadioGroup'
+import { APIUser } from "@/global/models"
+import { useUser, usersInstance, useUserOptions } from "@/hooks/use-query"
+import RoleSelect from "./RoleRadioGroup";
+import FormObject from '@/components/FormObject'
 
 
-interface Props
-{
-    user: User | null
-}
+export default function Form() {
+	const { userId } = useParams();
 
-export default function Form(props: Props) {
-    const [role, setRole] = useState<string>(props.user?.role || '')
+	const [ formErrors, setFormErrors ] = useState<{ [key: string]: string[] }>({})
+	const [ created, setCreated ] = useState<boolean>(false)
 
-    return (
-        <Box>
-            <Box>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField defaultValue={props.user?.username} label="Username" variant="outlined" fullWidth />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <RoleSelect setValue={setRole} defaultValue={props.user?.role}/>
-                    </Grid>
-                    {
-                        role === 'admin' &&
-                        <Grid item xs={12}>
-                            <AutocompleteBar selected={false} setSelected={() => {}}/>
-                        </Grid>
-                    }
-                    {
-                        role === 'staff' &&
-                        <Grid item xs={12}>
-                            <AutocompleteBranch selected={false} setSelected={() => {}}/>
-                        </Grid>
-                    }
-                    <Grid item xs={12} sm={6}>
-                        <PasswordInput label='Password'/>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <PasswordInput label='Password confirm'/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button fullWidth size='large' variant='contained' color='success'>Submit</Button>
-                    </Grid>
-                </Grid>
-            </Box>
-        </Box>
-    )
+	const data = useUser(userId)
+	const options = useUserOptions();
+
+	const mutation = useMutation({
+		mutationFn: async (formData: FormData) => {
+			const { data } = await usersInstance[userId ? 'put' : 'post'](`users/${userId ? userId+'/' : ''}`, formData);
+			return data as APIUser
+		},
+		onSuccess: () => {setFormErrors({}), data.refetch, setCreated(!userId)},
+		onError: (e) => {
+			e instanceof AxiosError && setFormErrors(e.response?.data)
+		}
+	})
+
+	return (
+		<FormObject
+			objectId={ userId }
+			objectData={ data }
+			objectOptions={ options }
+			objectOptionsExclude={ ['role'] }
+			objectVerboseName={ `User ${data.data && data.data.username}` }
+			objectMutation={ mutation }
+			objectMutationSuccessURL={ `/users/${ mutation.data && mutation.data.id }/update/` }
+			objectMutationSuccessIsPost={ created }
+			objectMutationErrors={ formErrors }
+		>
+			<Grid item xs={12}>
+				<RoleSelect
+					errors={formErrors?.role}
+					helperText={options.data?.actions.POST.role.help_text}
+					roles={options.data?.actions.POST.role.choices}
+					defaultValue={ data.data && data.data.role }
+				/>
+			</Grid>	
+		</FormObject>
+	)
+
 }

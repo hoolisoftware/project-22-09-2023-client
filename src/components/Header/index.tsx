@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     AppBar,
     Box,
+    Button,
     IconButton,
     Toolbar,
     Typography
@@ -11,6 +12,8 @@ import {
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import { Link as RouterLink } from 'react-router-dom'
 
 import { RootState } from '../../app/store';
 import { toggleTheme } from '../../features/theme/themeReducer';
@@ -35,12 +38,19 @@ export default function DrawerAppBar() {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{ mr: 1 }}
                     >
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        DASHBOARD
+                        <Button
+                            component={RouterLink}
+                            to='/'
+                            startIcon={<SportsSoccerIcon/>}
+                            color='inherit'
+                        >
+                            SWSPORTS
+                        </Button>
                     </Typography>
                     <Box>
                         <Account {...{setLogoutModal}}/>

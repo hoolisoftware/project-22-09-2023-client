@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 
 import { useAuth } from '@/hooks/useAuth'
-import { tokenInstance } from '@/hooks/agent'
+import { tokenInstance } from '@/hooks/use-query'
 import Footer from '@components/Footer'
 import PasswordField from '@/components/FieldPassword'
 

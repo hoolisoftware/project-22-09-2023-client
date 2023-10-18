@@ -5,8 +5,8 @@ import {
 
 import Dashboard from './pages/Dashboard'
 import History from './pages/History'
-import OfferCreateUpdate from './pages/OfferCreateUpdate'
-import OfferDetail from './pages/OfferDetail'
+import EventOfferCreateUpdate from './pages/EventOfferCreateUpdate'
+import EventOfferDetail from './pages/EventOfferDetail'
 import EventList from './pages/EventList'
 import QRGenerator from './pages/QRGenerator'
 import QRGeneratorDetail from './pages/QRGeneratorDetail'
@@ -18,7 +18,11 @@ import UserList from './pages/UserList'
 import UserCreateUpdate from './pages/UserCreateUpdate'
 import BranchList from './pages/BranchList'
 import BranchCreateUpdate from './pages/BranchCreateUpdate'
+import BetList from './pages/BetList'
+import BetCreateUpdate from './pages/BetCreateUpdate'
 import EmployeeCreateUpdate from './pages/EmployeeCreateUpdate'
+import OfferList from '@pages/OfferList'
+import OfferCreateUpdate from '@pages/OfferCreateUpdate'
 import Login from './pages/Login'
 import GetOfferList from '@pages/GetOfferList'
 import GetOfferDetail from '@/pages/GetOfferDetail'
@@ -43,16 +47,16 @@ const router = createBrowserRouter([
         element: <Page protected page={<History/>}/>
     },
     {
-        path: 'offers/:offerId/',
-        element: <Page protected page={<OfferDetail/>}/>
+        path: 'events/offers/:offerId/',
+        element: <Page protected page={<EventOfferDetail/>}/>
     },
     {
-        path: 'offers/create/',
-        element: <Page protected page={<OfferCreateUpdate/>}/>
+        path: 'events/offers/create/',
+        element: <Page protected page={<EventOfferCreateUpdate/>}/>
     },
     {
-        path: 'offers/:offerId/update/',
-        element: <Page protected page={<OfferCreateUpdate/>}/>
+        path: 'events/offers/:offerId/update/',
+        element: <Page protected page={<EventOfferCreateUpdate/>}/>
     },
     {
         path: 'events/',
@@ -113,6 +117,30 @@ const router = createBrowserRouter([
     {
         path: 'employees/:employeeId/update/',
         element: <Page protected page={<EmployeeCreateUpdate/>}/>
+    },
+    {
+        path: 'offers/',
+        element: <Page protected page={<OfferList/>}/>
+    },
+    {
+        path: 'offers/create',
+        element: <Page protected page={<OfferCreateUpdate/>}/>
+    },
+    {
+        path: 'offers/:offerId/update',
+        element: <Page protected page={<OfferCreateUpdate/>}/>
+    },
+    {
+        path: 'bets/',
+        element: <Page protected page={<BetList/>}/>
+    },
+    {
+        path: 'bets/create',
+        element: <Page protected page={<BetCreateUpdate/>}/>
+    },
+    {
+        path: 'bets/:betId/update',
+        element: <Page protected page={<BetCreateUpdate/>}/>
     },
     {
         path: 'get-offer/:branchId/:tableNo/',

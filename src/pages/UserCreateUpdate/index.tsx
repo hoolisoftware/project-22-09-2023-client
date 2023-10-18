@@ -1,19 +1,12 @@
 import { useParams } from 'react-router-dom';
 
-import type { User } from '@global/models'
 import Container from '../../components/Container'
-import PageLayout from '../../components/PageLayout';
+import PageLayout from '../../components/ProtectedPageLayout';
 import Form from './Form'
 
 
 export default function Page() {
     const { userId } = useParams()
-    const user: User | null = userId ? {
-        id: 1,
-        username: 'lama',
-        barname: 'Burger King',
-        role: 'admin'
-    } : null
     
     return <PageLayout
         title={userId ? `User #${userId} edit` : 'User Creation'}
@@ -23,7 +16,7 @@ export default function Page() {
         back={true}
     >
         <Container>
-            <Form user={user}/>
+            <Form/>
         </Container>
     </PageLayout>
 }

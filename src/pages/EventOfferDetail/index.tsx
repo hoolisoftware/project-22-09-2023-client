@@ -4,8 +4,8 @@ import {
 } from '@mui/material'
 
 import Container from '../../components/Container'
-import PageLayout from '../../components/PageLayout'
-import ActionInfo from '../../components/ActionInfo'
+import PageLayout from '../../components/ProtectedPageLayout'
+import ActionInfo from '../../components/OfferInfo'
 import Offer from './Offer'
 
 

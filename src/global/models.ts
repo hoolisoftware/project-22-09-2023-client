@@ -1,15 +1,56 @@
-export interface APIListOrganization
+export interface APIModel
 {
     id: number
+    [key: string]: unknown
+}
+
+export interface APIOrganization extends APIModel
+{
     name: string
     created: string
     branches_count: number 
 }
 
-export interface APIListBranch
+export interface APIBranch extends APIModel
 {
-    id: number
+    organization: APIOrganization
     address: string
+}
+
+export interface APIOffer extends APIModel
+{
+    action_id: number
+    team_a: string
+    team_b: string
+    created: string
+    organization: APIOrganization
+}
+
+export interface APIBet extends APIModel
+{
+    branch: APIBranch
+    offer: APIOffer
+    table_number: number
+    bet: string
+    created: string
+    paid: boolean
+}
+
+export interface APIUserMe extends APIModel
+{
+    is_superuser: true
+    username: "admin"
+    first_name: string
+    last_name: string
+    email: string
+    role: "superadmin"
+}
+
+
+export interface APIUser extends APIModel
+{
+    username: string
+    role: string
 }
 
 // ---

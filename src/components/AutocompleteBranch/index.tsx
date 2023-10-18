@@ -1,32 +1,38 @@
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import type { SyntheticEvent } from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
-import { RootState } from "@/app/store";
-import type { APIListBranch } from "@/global/models";
-import { useBranches } from "@/hooks/agent";
+import type { APIBranch } from '@/global/models';
+import { useBranches } from '@/hooks/use-query';
 
 interface Props {
-  selected: APIListBranch | null
-  setSelected: CallableFunction
+  selected: APIBranch | null
+  selectedOrganizationId?: number
+  setSelected?: CallableFunction
+  onChange: (e: SyntheticEvent, value: APIBranch | null) => void
+  disabled?: boolean
 }
 
 export default function Asynchronous(props: Props) {
-  const { data, error, isLoading } = useBranches();
-  const branch = useSelector((state: RootState) => state.filters.branch)
+  const { data, error, isLoading } = useBranches(props.selectedOrganizationId);
 
   if (error instanceof Error) return error.message 
+
+  if (Number(data?.results.length) == 1) {
+    props.setSelected && props.setSelected(data?.results[0])
+  }
 
   return (
     <>
       <Autocomplete
+        disabled={props.disabled || Number(data?.results.length) <= 1}
         loading={isLoading}
-        onChange={ (_, value) => props.setSelected(value) }
+        onChange={ props.onChange }
         disablePortal
         options={data?.results ? data.results : []}
         getOptionLabel={option => option.address}
-        defaultValue={ branch }
-        renderInput={(params) => <TextField {...params} label="Branch" fullWidth/>}
+        value={ Number(data?.results.length) == 1 ? data?.results[0] : props.selected }
+        renderInput={(params) => <TextField {...params} label='Branch' fullWidth/>}
       />
     </>
   );

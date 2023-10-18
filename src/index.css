@@ -1,34 +1,33 @@
-@import 'normalize.css';
+@import "normalize.css";
 
-@import '@fontsource/roboto/300.css';
-@import '@fontsource/roboto/400.css';
-@import '@fontsource/roboto/500.css';
-@import '@fontsource/roboto/700.css';
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
 
-:root
-{
+:root {
   font-family: Roboto;
 }
 
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #009688;    ;
-  }
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #009688;
+}
 
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: .6rem;
-    height: .4rem;
-  }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.6rem;
+  height: 0.4rem;
+}
 
-  *::-webkit-scrollbar-track {
-    background: #fff;
-  }
+*::-webkit-scrollbar-track {
+  background: #fff;
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: #009688;    ;
-    border-radius: 10px;
-    border: 1px solid #ffffff;
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: #009688;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+}

@@ -1,31 +1,42 @@
-import {
-    Box,
-    Button,
-    Grid,
-    TextField,
-} from "@mui/material"
+import { AxiosError } from "axios"
+import { useState } from "react"
+import { useParams } from "react-router-dom"
+import { useMutation } from "@tanstack/react-query"
 
-import type { Bar } from '@global/models'
+import { APIOrganization } from "@/global/models"
+import { organizationsInstance, useOrganization, useOrganizationOptions } from "@/hooks/use-query"
+import FormObject from '@components/FormObject'
 
 
-interface Props
-{
-    bar: Bar | null
-}
+export default function Form() {
+    const [ formErrors, setFormErrors ] = useState<{ [key: string]: string[] }>({})
+    const [ created, setCreated ] = useState<boolean>(false)
 
-export default function Form(props: Props) {
+    const { barId } = useParams()
+    const data = useOrganization(barId)
+    const options = useOrganizationOptions();
+	const mutation = useMutation({
+		mutationFn: async (formData: FormData) => {
+			const { data } = await organizationsInstance[barId ? 'put' : 'post'](`organizations/${barId ? barId+'/' : ''}`, formData);
+			return data as APIOrganization
+		},
+		onSuccess: () => {data.refetch(); setFormErrors({}); setCreated(!barId)},
+		onError: (e) => {
+			e instanceof AxiosError && setFormErrors(e.response?.data)
+		}
+	})
+
     return (
-        <Box>
-            <Box>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <TextField defaultValue={props.bar?.name} label="Name" variant="outlined" fullWidth />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button fullWidth size='large' variant='contained' color='success'>Submit</Button>
-                    </Grid>
-                </Grid>
-            </Box>
-        </Box>
-    )
+		<FormObject
+			objectId={ barId }
+			objectData={ data }
+			objectOptions={ options }
+			objectVerboseName={ `Bar ${data.data && data.data.name}` }
+			objectMutation={ mutation }
+			objectMutationSuccessURL={ `/bars/${ mutation.data && mutation.data.id }/update/` }
+			objectMutationSuccessIsPost={ created }
+			objectMutationErrors={ formErrors }
+		/>
+	)
+
 }

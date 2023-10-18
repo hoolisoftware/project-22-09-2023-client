@@ -5,7 +5,7 @@ interface ThemeState {
 }
 
 const initialState: ThemeState = {
-    modeDark: true,
+    modeDark: JSON.parse(localStorage.getItem('modeDark')||'true'),
 }
 
 export const modalSlice = createSlice({
@@ -13,6 +13,7 @@ export const modalSlice = createSlice({
     initialState,
     reducers: {
         toggleTheme: (state) => {
+            localStorage.setItem('modeDark', JSON.stringify(!state.modeDark))
             state.modeDark = !state.modeDark
         },
     },

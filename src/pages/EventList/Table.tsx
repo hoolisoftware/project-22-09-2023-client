@@ -117,8 +117,8 @@ export default function CustomizedTables() {
                                         <Button
                                             fullWidth
                                             to={
-                                                item.status === 'create' ? '/offers/create' :
-                                                '/offers/1/update'
+                                                item.status === 'create' ? '/events/offers/create' :
+                                                '/events/offers/1/update'
                                             }
                                             component={RouterLink}
                                             variant='contained'
@@ -142,7 +142,7 @@ export default function CustomizedTables() {
                                             <IconButton
                                                 size='small'
                                                 component={RouterLink}
-                                                to={`/offers/${item.actionId}`}
+                                                to={`/events/offers/${item.actionId}`}
                                             >
                                                 <InfoIcon/>
                                             </IconButton>

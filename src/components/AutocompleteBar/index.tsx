@@ -1,33 +1,47 @@
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import type { SyntheticEvent } from 'react';
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
-import { RootState } from "@/app/store";
-import type { APIListOrganization } from "@/global/models";
-import { useOrganizations } from "@/hooks/agent";
+import type { APIOrganization } from '@/global/models';
+import { useOrganizations } from '@/hooks/use-query'
 
 interface Props {
-  selected: APIListOrganization | null
-  setSelected: CallableFunction
+  selected?: number
+  onChange: (e: SyntheticEvent, value: APIOrganization | null) => void
+  disabled?: boolean
+  name?: string
 }
 
 export default function Asynchronous(props: Props) {
-  const organization = useSelector((state: RootState) => state.filters.organization)
+  const [ selected, setSelected ] = useState<APIOrganization|null>(null)
+
   const { data, error, isLoading } = useOrganizations();
 
   if (error instanceof Error) return error.message
 
+  if (isLoading) return 'Loading...'
+
   return (
     <>
       <Autocomplete
-        loading={isLoading}
-        onChange={ (_, value) => props.setSelected(value) }
+        sx={{mb: 2}}
+        disabled={props.disabled || Number(data?.results.length) <= 1}
+        onChange={ (event, newValue) => {props.onChange(event, newValue), setSelected(newValue)} }
         disablePortal
         options={data?.results ? data.results : []}
         getOptionLabel={option => option.name}
-        defaultValue={ organization }
-        renderInput={(params) => <TextField {...params} label="Movie" fullWidth/>}
-      />
+        defaultValue={
+          props.selected || selected ?
+            data?.results.filter(item=>item.id===props.selected)[0] :
+            data?.results[0]
+        }
+        renderInput={(params) => <TextField {...params} label='Bar' fullWidth/>}
+        />
+        {
+          props.name &&
+          <input hidden type="text" name={props.name} value={selected ? selected.id : props.selected || data?.results[0].id }/>
+        }
     </>
   );
 }

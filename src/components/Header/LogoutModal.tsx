@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -5,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
 import { useAuth } from '@/hooks/useAuth';
+import { setOrganization, setBranch } from '@/features/filters/filtersReducer';
 
 
 interface props {
@@ -14,7 +16,8 @@ interface props {
 
 
 export default function AlertDialog(props: props) {
-    const { setToken } = useAuth()
+    const dispatch = useDispatch()
+    const { setToken, setTokenRefresh } = useAuth()
 
     return (
         <Dialog
@@ -31,7 +34,11 @@ export default function AlertDialog(props: props) {
             <DialogActions>
                 <Button onClick={ () => props.setActive(false) }>Cancel</Button>
                 <Button 
-                    onClick={ () => setToken() }
+                    onClick={ () => {
+                        setToken(); setTokenRefresh()
+                        dispatch(setOrganization(null))
+                        dispatch(setBranch(null))
+                    } }
                     autoFocus
                 >
                     Logout

@@ -10,6 +10,7 @@ import {
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 
+import { useMe } from '@/hooks/use-query';
 import MenuItemLink from '../MenuItemLink';
 
 
@@ -19,6 +20,8 @@ interface props
 }
 
 export default function BasicMenu(props: props) {
+  const { data, isLoading } = useMe()
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,17 +34,18 @@ export default function BasicMenu(props: props) {
   return (
     <>
       <Button
-        id="basic-button"
+        id='basic-button'
         aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
+        aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         sx={{color: 'white'}}
       >
-        ADMIN
+        { isLoading && 'Loading...' }
+        { data && data.username }
       </Button>
       <Menu
-        id="basic-menu"
+        id='basic-menu'
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -53,7 +57,7 @@ export default function BasicMenu(props: props) {
         <Divider/>
         <MenuItem onClick={ () => props.setLogoutModal(true) }>
           <ListItemIcon>
-            <LogoutIcon fontSize="small" />
+            <LogoutIcon fontSize='small' />
           </ListItemIcon>
           <ListItemText>Logout</ListItemText>
         </MenuItem>

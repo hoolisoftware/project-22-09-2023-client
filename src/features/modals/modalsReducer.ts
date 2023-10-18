@@ -6,8 +6,8 @@ interface ModalsState {
 }
 
 const initialState: ModalsState = {
-    modalBar: false,
-    modalBranch: false
+    modalBar: JSON.parse(localStorage.getItem('modalBar')||'false'),
+    modalBranch: JSON.parse(localStorage.getItem('modalBranch')||'false')
 }
 
 export const modalSlice = createSlice({
@@ -15,9 +15,11 @@ export const modalSlice = createSlice({
     initialState,
     reducers: {
         toggleModalBar: (state) => {
+            localStorage.setItem('modalBar', JSON.stringify(!state.modalBar))
             state.modalBar = !state.modalBar
         },
         toggleModalBranch: (state) => {
+            localStorage.setItem('modalBranch', JSON.stringify(!state.modalBranch))
             state.modalBranch = !state.modalBranch
         },
     },

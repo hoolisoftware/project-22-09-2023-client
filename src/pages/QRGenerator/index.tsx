@@ -5,7 +5,7 @@ import {
 } from '@mui/material'
 
 import Container from '../../components/Container'
-import PageLayout from '../../components/PageLayout';
+import PageLayout from '../../components/ProtectedPageLayout';
 
 
 

@@ -6,7 +6,7 @@ import {
 import {
     MenuItem,
     ListItemIcon,
-    ListItemText
+    ListItemText,
 } from '@mui/material'
 
 interface MenuItemLinkProps {

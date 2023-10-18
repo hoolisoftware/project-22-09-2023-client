@@ -1,31 +1,42 @@
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import {
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
+  Typography
+} from '@mui/material'
 
 
 interface Props
 {
     defaultValue?: string
-    setValue?: CallableFunction
+    roles?: {
+      value: string
+      display_name: string
+    }[],
+    errors?: string[],
+    helperText?: string
 }
 
 export default function RowRadioButtonsGroup(props: Props) {
   return (
-    <FormControl>
-      <FormLabel id="demo-row-radio-buttons-group-label">Role</FormLabel>
+    <div>
+      <FormLabel>Role ({props.helperText})</FormLabel>
       <RadioGroup
-        onChange={ (event) => props.setValue && props.setValue(event.currentTarget.value) }
         row
-        aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group"
+        name='role'
         defaultValue={props.defaultValue}
+        color='danger'
       >
-        <FormControlLabel value="superadmin" control={<Radio />} label="Superadmin" />
-        <FormControlLabel value="admin" control={<Radio />} label="Admin" />
-        <FormControlLabel value="staff" control={<Radio />} label="Staff" />
+        {
+          props.roles && props.roles.map(role =>
+            <FormControlLabel key={role.value} value={role.value} control={<Radio />} label={role.display_name} />
+          )
+        }
       </RadioGroup>
-    </FormControl>
+      <Typography sx={{color: 'red'}}>
+        {props.errors && "Don't leave this field blank"}
+      </Typography>
+    </div>
   );
 }

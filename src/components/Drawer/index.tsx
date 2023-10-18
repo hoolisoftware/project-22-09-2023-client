@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     Box,
     Button,
@@ -12,6 +12,7 @@ import {
     Divider
 } from '@mui/material'
 
+import { RootState } from '@/app/store';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HistoryIcon from '@mui/icons-material/History';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -33,6 +34,7 @@ interface props {
 
 export default function TemporaryDrawer(props: props) {
     const dispatch = useDispatch()
+    const filters = useSelector((state: RootState) => state.filters)
 
     const list = <Box
         sx={{ width: 250 }}
@@ -43,10 +45,10 @@ export default function TemporaryDrawer(props: props) {
         <List
             subheader={<ListSubheader>Current bnrach</ListSubheader>}
         >
-            <ListItemLink to='/events' primary={'Events'} icon={<LocalOfferIcon />}/>
-            <ListItemLink to='/winners' primary={'Winners'} icon={<EmojiEventsIcon />}/>
-            <ListItemLink to='/history' primary={'History'} icon={<HistoryIcon />}/>
-            <ListItemLink to='/qr-generator' primary={'QR generator'} icon={<QrCodeIcon />}/>
+            <ListItemLink to='/events' primary={'Events (Soon...)'} icon={<LocalOfferIcon />}/>
+            <ListItemLink to='/winners' primary={'Winners (Soon...)'} icon={<EmojiEventsIcon />}/>
+            <ListItemLink to='/history' primary={'History (Soon...)'} icon={<HistoryIcon />}/>
+            <ListItemLink to='/qr-generator' primary={'QR generator (Soon...)'} icon={<QrCodeIcon />}/>
         </List>
         <List
             subheader={<ListSubheader>Filters</ListSubheader>}
@@ -60,7 +62,7 @@ export default function TemporaryDrawer(props: props) {
                         <BusinessIcon/>
                     </ListItemIcon>
                     <ListItemText>
-                        Burger King
+                        {filters.organization?.name}
                     </ListItemText>
                 </ListItemButton>
             </ListItem>
@@ -73,7 +75,7 @@ export default function TemporaryDrawer(props: props) {
                         <LocationOnIcon/>
                     </ListItemIcon>
                     <ListItemText>
-                        Астраханская область, город Клин, наб. Ломоносова, 15
+                        {filters.branch?.address}
                     </ListItemText>
                 </ListItemButton>
             </ListItem>
@@ -84,7 +86,9 @@ export default function TemporaryDrawer(props: props) {
             <ListItemLink to='/users' primary={'Users'} icon={<GroupIcon />}/>
             <ListItemLink to='/bars' primary={'Bars'} icon={<BusinessIcon />}/>
             <ListItemLink to='/branches' primary={'Branches'} icon={<LocationOnIcon />}/>
-        </List>
+            <ListItemLink to='/offers' primary={'Offers'} icon={<LocalOfferIcon />}/>
+            <ListItemLink to='/bets' primary={'Bets'} icon={<EmojiEventsIcon />}/>
+        </List>        
         <Divider/>
         <Button sx={{mt: 2}} fullWidth color='error' startIcon={<LogoutIcon />} onClick={ () => props.setLogoutModal(true) }>Logout</Button>
     </Box>

@@ -26,8 +26,9 @@ export default function BasicBreadcrumbs(props: Props) {
             Dashboard
             </Link>
             {
-                Array.isArray(props.breadcrumbs) && props.breadcrumbs.map(item => 
+                Array.isArray(props.breadcrumbs) && props.breadcrumbs.map((item, index) => 
                     <Link
+                        key={index}
                         component={RouterLink}
                         to={item[1]}
                         underline="hover"
