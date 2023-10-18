@@ -31,7 +31,12 @@ export const onError = async (e: Error) => {
             case 401: {
                 try {
                     const { data } = await tokenInstance.post('/refresh/', { refresh: localStorage.getItem('JWTTokenRefresh') })
-                    localStorage.setItem('JWTToken', data.access)
+                    if (data.access) {
+                        localStorage.setItem('JWTToken', data.access)
+                    } else {
+                        localStorage.removeItem('JWTToken')
+                        localStorage.removeItem('JWTTokenRefresh')
+                    }
                     location.reload()
                 } catch {
                     break
