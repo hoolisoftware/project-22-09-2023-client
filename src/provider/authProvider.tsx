@@ -36,7 +36,7 @@ const AuthProvider = (props: React.HTMLAttributes<HTMLDivElement>) => {
 			localStorage.removeItem('JWTToken');
 			localStorage.removeItem('JWTTokenRefresh')
 		}
-	}, [token, tokenRefresh]);
+	}, [token, tokenRefresh])
 
 	const contextValue = useMemo(
 		() => ({
