@@ -8,13 +8,13 @@ import { useOrganizations } from '@/hooks/use-query'
 
 interface Props {
   selected?: number
-  onChange: (e: SyntheticEvent, value: APIOrganization | null) => void
+  onChange: (e: SyntheticEvent, value?: APIOrganization) => void
   disabled?: boolean
   name?: string
 }
 
 export default function Asynchronous(props: Props) {
-  const [ selected, setSelected ] = useState<APIOrganization|null>(null)
+  const [selected, setSelected] = useState<APIOrganization | undefined>()
 
   const { data, error, isLoading } = useOrganizations();
 
@@ -25,23 +25,22 @@ export default function Asynchronous(props: Props) {
   return (
     <>
       <Autocomplete
-        sx={{mb: 2}}
+        sx={{ mb: 2 }}
         disabled={props.disabled || Number(data?.results.length) <= 1}
-        onChange={ (event, newValue) => {props.onChange(event, newValue), setSelected(newValue)} }
+        onChange={(event, newValue) => { props.onChange(event, newValue||undefined), setSelected(newValue||undefined) }}
         disablePortal
         options={data?.results ? data.results : []}
         getOptionLabel={option => option.name}
         defaultValue={
-          props.selected || selected ?
-            data?.results.filter(item=>item.id===props.selected)[0] :
-            data?.results[0]
+          (props.selected || selected) &&
+          data?.results.filter(item => item.id === props.selected)[0] || undefined
         }
-        renderInput={(params) => <TextField {...params} label='Bar' fullWidth/>}
-        />
-        {
-          props.name &&
-          <input hidden type="text" name={props.name} value={selected ? selected.id : props.selected || data?.results[0].id }/>
-        }
+        renderInput={(params) => <TextField {...params} label='Bar' fullWidth />}
+      />
+      {
+        props.name &&
+        <input hidden type="text" name={props.name} value={selected ? selected.id : props.selected || data?.results[0].id} />
+      }
     </>
   );
 }
