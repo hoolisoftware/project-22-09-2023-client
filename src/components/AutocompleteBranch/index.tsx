@@ -6,7 +6,7 @@ import type { APIBranch } from '@/global/models';
 import { useBranches } from '@/hooks/use-query';
 
 interface Props {
-  selected: APIBranch | null
+  selected?: APIBranch
   selectedOrganizationId?: number
   setSelected?: CallableFunction
   onChange: (e: SyntheticEvent, value: APIBranch | null) => void

@@ -11,7 +11,6 @@ import {
 } from '@mui/material'
 import BusinessIcon from '@mui/icons-material/Business';
 
-import type { APIOrganization, APIBranch } from '@/global/models';
 import { RootState } from '../../app/store';
 import { toggleModalBar } from '../../features/modals/modalsReducer';
 import { setOrganization, setBranch } from '@/features/filters/filtersReducer';
@@ -33,8 +32,8 @@ export default function ChangeOrganizationModal() {
   const dispatch = useDispatch()
   const active = useSelector((state: RootState) => state.modals.modalBar)
   const filters = useSelector((state: RootState) => state.filters)
-  const [selectedOrganization, setSelectedOrganization] = useState<APIOrganization|null>(filters.organization)
-  const [selectedBranch, setSelectedBranch] = useState<APIBranch|null>(filters.branch)
+  const [selectedOrganization, setSelectedOrganization] = useState(filters.organization)
+  const [selectedBranch, setSelectedBranch] = useState(filters.branch)
 
   const reset = () => {
     setSelectedOrganization(filters.organization)
@@ -62,7 +61,7 @@ export default function ChangeOrganizationModal() {
                     (_, value) => {
                       if (value?.id !== selectedOrganization?.id) {
                         setSelectedOrganization(value)
-                        setSelectedBranch(null)
+                        setSelectedBranch(undefined)
                       }
                   }}
                 />
@@ -71,10 +70,10 @@ export default function ChangeOrganizationModal() {
                 <Box sx={{mb: 3}}>
                   <AutocompleteBranch
                     selected={selectedBranch}
-                  setSelected={setSelectedBranch}
+                    setSelected={setSelectedBranch}
                     selectedOrganizationId={selectedOrganization?.id}
                     onChange={
-                      (_, value) => setSelectedBranch(value)
+                      (_, value) => setSelectedBranch(value||undefined)
                     }
                   />
                 </Box>

@@ -5,8 +5,8 @@ import type {
 } from '@/global/models'
 
 interface FiltersState {
-    organization: APIOrganization,
-    branch: APIBranch
+    organization?: APIOrganization,
+    branch?: APIBranch
 }
 
 const initialState: FiltersState = {

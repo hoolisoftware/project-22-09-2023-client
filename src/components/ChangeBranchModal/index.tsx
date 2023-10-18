@@ -12,7 +12,6 @@ import {
 import AccountTree from '@mui/icons-material/AccountTree';
 
 import { RootState } from '../../app/store';
-import { APIBranch } from '@/global/models';
 import { toggleModalBranch } from '../../features/modals/modalsReducer';
 import Autocomplete from '../AutocompleteBranch'
 
@@ -31,7 +30,7 @@ export default function BasicModal() {
   const dispatch = useDispatch()
   const active = useSelector((state: RootState) => state.modals.modalBranch)
   const filters = useSelector((state: RootState) => state.filters)
-  const [selected, setSelected] = useState<APIBranch|null>(filters.branch)
+  const [selected, setSelected] = useState(filters.branch)
 
   const reset = () => {
     setSelected(filters.branch)
@@ -53,7 +52,7 @@ export default function BasicModal() {
               </Typography>
               <Autocomplete selected={selected} selectedOrganizationId={filters.organization?.id}
                 onChange={
-                  (_, value) => setSelected(value)
+                  (_, value) => setSelected(value||undefined)
                 }
               />
               <Stack direction={'row'} sx={{mt:3}} gap={1}>
